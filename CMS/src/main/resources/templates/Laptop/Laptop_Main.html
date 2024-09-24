@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Main</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light Blue background color */
+            color: #333;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff; /* White background color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+        }
+        h1 {
+            color: #4b0082; /* Indigo color */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Light text shadow */
+        }
+        .btn {
+            background-color: #32cd32; /* Lime green color */
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3); /* Green shadow effect */
+        }
+        .btn:hover {
+            background-color: #228b22; /* Forest green color */
+            border-color: #228b22;
+        }
+        .table {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table th, .table td {
+            color: #333;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #e6f7ff; /* Slightly darker light blue on hover */
+        }
+        .pagination a {
+            color: #4b0082;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .pagination a:hover {
+            text-decoration: underline;
+        }
+        .search-button {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+   <!-- Search Form -->
+<form th:action="@{/searchLaptops}" method="get">
+    <div class="form-row align-items-center mb-3">
+        <div class="col-auto">
+            <label class="sr-only" for="laptopSerialNo">Search by Serial Number:</label>
+            <input type="text" id="laptopSerialNo" name="laptopSerialNo" class="form-control mb-2" placeholder="Enter Serial Number">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+        </div>
+    </div>
+</form>
+
+
+    <!-- Main Content -->
+    <h1>Laptop Main</h1>
+
+    <div class="d-flex justify-content-between mb-3">
+        <a th:href="@{/Laptop/new}" class="btn btn-primary btn-sm">Add Laptop</a>
+    </div>
+    <div class="text-center mb-3">
+        <a th:href="@{/GenerateLaptopPdfReport}" class="btn btn-primary btn-sm mx-2">Generate PDF</a>
+        <a th:href="@{/GenerateLaptopExcelReport}" class="btn btn-primary btn-sm mx-2">Generate ExcelSheet</a>
+    </div>
+    <table border="1" class="table table-striped table-responsive-md table-hover">
+        <thead>
+            <tr>
+                <th>Laptop ID</th>
+                <th>Purchase Date</th>
+                <th>Serial Number</th>
+                <th>Purchased From</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="laptop : ${listLaptops}">
+                <td th:text="${laptop.laptopId}"></td>
+                <td th:text="${laptop.laptopPurchaseDate}"></td>
+                <td th:text="${laptop.laptopSerialNo}"></td>
+                <td th:text="${laptop.laptopPurchasedFrom}"></td>
+                <td>
+                    <a class="btn btn-outline-primary btn-sm" th:href="@{/Laptop/view/{id}(id=${laptop.laptopId})}">View</a>
+                    <a class="btn btn-outline-success btn-sm" th:href="@{/Laptop/edit/{id}(id=${laptop.laptopId})}">Edit</a>
+                    <a class="btn btn-outline-danger btn-sm" th:href="@{/Laptop/delete/{id}(id=${laptop.laptopId})}" onclick="return confirm('Are you sure you want to delete this laptop?')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+  <!-- Pagination -->
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <!-- Previous Button -->
+        <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled' : ''">
+            <a class="page-link" th:href="@{/Laptoppage/{pageNo}(pageNo=${currentPage - 1})}" th:text="'Previous'"></a>
+        </li>
+
+        <!-- Page Number Display -->
+        <li class="page-item disabled">
+            <span class="page-link" th:text="${currentPage}"></span>
+        </li>
+
+        <!-- Next Button -->
+        <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled' : ''">
+            <a class="page-link" th:href="@{/Laptoppage/{pageNo}(pageNo=${currentPage + 1})}" th:text="'Next'"></a>
+        </li>
+    </ul>
+</nav>
+
+
+    <!-- Total Entries -->
+    <p class="text-center">Total Entries: <span th:text="${totalItems}"></span></p>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <button type="button" class="btn btn-primary btn-rounded" onclick="window.location.href='/admin/dashboard'">Back</button>
+    </div>
+
+</div>
+
+</body>
+</html>

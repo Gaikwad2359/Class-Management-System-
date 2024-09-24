@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Batch</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f8ff;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+        h2, .page-title {
+            color: #4b0082;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn-success {
+            background-color: #32cd32;
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3);
+        }
+        .btn-primary {
+            background-color: #1e90ff;
+            border-color: #1e90ff;
+            box-shadow: 0px 0px 10px rgba(30, 144, 255, 0.3);
+        }
+        .btn-rounded {
+            border-radius: 20px;
+        }
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="page-title">Edit Batch</h2>
+    <form th:action="@{/UpdateBatch/{id}(id=${batch.batchId})}" th:object="${batch}" method="post">
+        <input type="hidden" th:field="*{batchId}">
+        <div class="form-group">
+            <label for="batchName">Batch Name:</label>
+            <input type="text" class="form-control" id="batchName" th:field="*{batchName}" required>
+        </div>
+        <div class="form-group">
+            <label for="startDate">Start Date:</label>
+            <input type="text" class="form-control" id="startDate" th:field="*{batchStartDate}" required>
+        </div>
+        <div class="form-group">
+            <label for="endDate">End Date:</label>
+            <input type="text" class="form-control" id="endDate" th:field="*{batchEndDate}" required>
+        </div>
+        <div class="form-group">
+            <label for="details">Details:</label>
+            <textarea class="form-control" id="details" th:field="*{batchDetails}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="remarks">Remarks:</label>
+            <textarea class="form-control" id="remarks" th:field="*{batchRemarks}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <input type="text" class="form-control" id="status" th:field="*{batchStatus}" required>
+        </div>
+        <div class="form-group">
+            <label for="course">Course:</label>
+            <select class="form-control" id="course" th:field="*{courseMaster.courseId}">
+                <option th:each="course : ${listCourses}" th:value="${course.courseId}" th:text="${course.courseName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="faculty">Faculty:</label>
+            <select class="form-control" id="faculty" th:field="*{facultyMaster.facultyId}">
+                <option th:each="faculty : ${listFaculties}" th:value="${faculty.facultyId}" th:text="${faculty.facultyFirstName}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-rounded">Update</button>
+        <button type="button" class="btn btn-primary btn-rounded" onclick="window.location.href='/Batches'">Back</button>
+    </form>
+</div>
+</body>
+</html>

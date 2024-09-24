@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Daily Updates</title>
+    <style>
+        /* Base styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        li {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s forwards;
+            animation-delay: calc(0.1s * var(--i));
+        }
+
+        strong {
+            display: block;
+            color: #007bff;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        /* Fade-in and slide-up animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Add hover effect */
+        li:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Add some animation delay to each item */
+        li:nth-child(1) {
+            --i: 1;
+        }
+        li:nth-child(2) {
+            --i: 2;
+        }
+        li:nth-child(3) {
+            --i: 3;
+        }
+        li:nth-child(4) {
+            --i: 4;
+        }
+        li:nth-child(5) {
+            --i: 5;
+        }
+
+        /* Responsive design */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            li {
+                padding: 15px;
+            }
+
+            p {
+                font-size: 0.9em;
+            }
+        }
+
+        /* Back button styling */
+        .links {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .links a {
+            display: inline-block;
+            font-size: 18px;
+            color: #fff;
+            background-color: rgb(0, 128, 192);
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .links a:hover {
+            background-color: rgb(0, 128, 192);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .links a:active {
+            background-color: rgb(0, 128, 192);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Daily Updates for Your Batches</h1>
+    <ul>
+        <li th:each="update : ${updates}">
+            <strong th:text="${update.updateDate}">Update Date</strong>: 
+            <p th:text="${update.message}">Message</p>
+        </li>
+    </ul>
+    
+    <div class="links">
+        <a href="/user/user-dashboard">Back</a>
+    </div>
+</body>
+</html>

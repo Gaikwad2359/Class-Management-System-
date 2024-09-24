@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Country</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background color */
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff; /* White container background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+        }
+
+        .page-title {
+            color: #4b0082; /* Indigo color for heading */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Light text shadow */
+        }
+
+        .btn-success {
+            background-color: #32cd32; /* Lime green color for buttons */
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3); /* Green shadow effect */
+        }
+
+        .btn-primary {
+            background-color: #1e90ff; /* Dodger blue color for buttons */
+            border-color: #1e90ff;
+            box-shadow: 0px 0px 10px rgba(30, 144, 255, 0.3); /* Blue shadow effect */
+        }
+
+        .btn-rounded {
+            border-radius: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .alert {
+            display: none;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="page-title">Add Country</h1>
+    <form id="countryForm" th:action="@{/AddCountry}" th:object="${country}" method="post">
+        <div class="form-group">
+            <label for="countryName">Country Name</label>
+            <input type="text" class="form-control" id="countryName" th:field="*{countryName}" placeholder="Enter country name" required>
+        </div>
+        <div class="form-group">
+            <label for="countryDescription">Country Description</label>
+            <input type="text" class="form-control" id="countryDescription" th:field="*{countryDesc}" placeholder="Enter country description" required>
+        </div>
+        <div class="alert alert-danger" id="errorAlert">Please use only alphabets in the fields.</div>
+
+        <button type="submit" class="btn btn-success btn-rounded">Add Country</button>
+        <button type="button" class="btn btn-primary btn-rounded" onclick="window.location.href='/Countries'">Back</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('countryForm').addEventListener('submit', function(event) {
+        var countryName = document.getElementById('countryName').value;
+        var countryDescription = document.getElementById('countryDescription').value;
+        var errorAlert = document.getElementById('errorAlert');
+        
+        var regex = /^[A-Za-z\s]+$/;
+
+        if (!regex.test(countryName) || !regex.test(countryDescription)) {
+            event.preventDefault();
+            errorAlert.style.display = 'block';
+        } else {
+            errorAlert.style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>

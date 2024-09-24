@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student References</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light Blue background color */
+            color: #333;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff; /* White background color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+        }
+        h1 {
+            color: #4b0082; /* Indigo color */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Light text shadow */
+        }
+        .btn {
+            background-color: #32cd32; /* Lime green color */
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3); /* Green shadow effect */
+        }
+        .btn:hover {
+            background-color: #228b22; /* Forest green color */
+            border-color: #228b22;
+        }
+        .table {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table th, .table td {
+            color: #333;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f0f8ff; /* Light blue on hover */
+        }
+        .pagination a {
+            color: #4b0082;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        .pagination a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Student Reference List</h1>
+    
+    <div class="d-flex justify-content-between mb-3">
+        <a th:href="@{/StudentReference/new}" class="btn btn-primary btn-sm">Add Student Reference</a>
+        <div class="text-center mx-auto">
+            <a th:href="@{/GenerateStudentReferencePdfReport}" class="btn btn-primary btn-sm">Generate PDF</a>
+            <a th:href="@{/GenerateStudentReferenceExcelReport}" class="btn btn-primary btn-sm">Generate ExcelSheet</a>
+        </div>
+    </div>
+    
+    <table border="1" class="table table-striped table-responsive-md table-hover">
+        <thead>
+            <tr>
+                <th>Reference ID</th>
+                <th>Reference Name</th>
+                <th>Student First Name</th>
+                <th>Student Last Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="studentReference : ${listStudentReferences}">
+                <td th:text="${studentReference.referenceId}"></td>
+                <td th:text="${studentReference.referenceStudentName}"></td>
+                <td th:text="${studentReference.studentMaster.studentFirstName}"></td>
+                <td th:text="${studentReference.studentMaster.studentLastName}"></td>
+                <td>
+                    <a class="btn btn-outline-primary btn-sm" th:href="@{/StudentReference/view/{id}(id=${studentReference.referenceId})}">View</a>
+                    <a class="btn btn-outline-success btn-sm" th:href="@{/StudentReference/edit/{id}(id=${studentReference.referenceId})}">Edit</a>
+                    <a class="btn btn-outline-danger btn-sm" th:href="@{/StudentReference/{id}(id=${studentReference.referenceId})}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="text-center mt-4">
+        <button type="button" class="btn btn-primary btn-rounded" onclick="window.location.href='/admin/dashboard'">Back</button>
+    </div>
+</div>
+
+</body>
+</html>

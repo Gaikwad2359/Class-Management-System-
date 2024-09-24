@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Laptop Allocation Report</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        /* General styling for the body */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #f0f4f8, #d9e2ec);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Header styling */
+        .header {
+            width: 100%;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: slideDown 1.5s ease-in-out;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeInText 2s ease-in-out;
+        }
+
+        /* Table styling */
+        table {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            animation: slideUpTable 1.5s ease-in-out;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: left;
+            font-size: 18px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tbody tr:hover {
+            background-color: #e1e8ed;
+            transform: scale(1.01);
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Back button styling */
+        .links {
+            margin: 30px;
+            text-align: center;
+        }
+
+        .links a {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #6a11cb;
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 16px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .links a:hover {
+            background-color: #4c0080;
+            transform: translateY(-5px);
+        }
+
+        /* Footer styling */
+        .footer {
+            background-color: #6a11cb;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            box-shadow: 0px -2px 8px rgba(0, 0, 0, 0.1);
+            animation: slideInUp 1s ease-in-out;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInText {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUpTable {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Student Laptop Allocation Report</h1>
+    </div>
+
+    <div th:if="${laptopAllocations != null}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Laptop Serial No</th>
+                    <th>Allocation Date</th>
+                    <th>Laptop Cost</th>
+                    <th>Remarks</th>
+                    <th>Student First Name</th>
+                    <th>Student Last Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="laptop : ${laptopAllocations}">
+                    <td th:text="${laptop.laptopMaster.laptopSerialNo}"></td>
+                    <td th:text="${laptop.allocationDate}"></td>
+                    <td th:text="${laptop.laptopCost}"></td>
+                    <td th:text="${laptop.remarks}"></td>
+                    <td th:text="${laptop.studentMaster.studentFirstName}"></td>
+                    <td th:text="${laptop.studentMaster.studentLastName}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="links">
+        <a href="/user/user-dashboard" class="btn-back">Back to Home</a>
+    </div>
+
+</body>
+</html>

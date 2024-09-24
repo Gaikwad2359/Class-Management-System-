@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student Installment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background color */
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff; /* White container background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+        }
+
+        h1, .page-title {
+            color: #4b0082; /* Indigo color for heading */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Light text shadow */
+        }
+
+        .btn-success {
+            background-color: #32cd32; /* Lime green color for buttons */
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3); /* Green shadow effect */
+        }
+
+        .btn-primary {
+            background-color: #1e90ff; /* Dodger blue color for buttons */
+            border-color: #1e90ff;
+            box-shadow: 0px 0px 10px rgba(30, 144, 255, 0.3); /* Blue shadow effect */
+        }
+
+        .btn-rounded {
+            border-radius: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="page-title">Edit Student Installment</h1>
+    <form th:action="@{/UpdateStudentInstallment/{id}(id=${studentInstallment.instId})}" th:object="${studentInstallment}" method="POST">
+        <input type="hidden" th:field="*{instId}" />
+        <div class="form-group">
+            <label for="instDate">Installment Date</label>
+            <input type="text" class="form-control" id="instDate" th:field="*{instDate}" placeholder="Enter Installment Date">
+        </div>
+        <div class="form-group">
+            <label for="instAmount">Installment Amount</label>
+            <input type="number" step="0.01" class="form-control" id="instAmount" th:field="*{instAmount}" placeholder="Enter Installment Amount">
+        </div>
+        <div class="form-group">
+            <label for="instPaymentType">Payment Type</label>
+            <input type="text" class="form-control" id="instPaymentType" th:field="*{instPaymentType}" placeholder="Enter Payment Type">
+        </div>
+        <div class="form-group">
+            <label for="instPayChequeNo">Cheque Number (if applicable)</label>
+            <input type="text" class="form-control hidden" id="instPayChequeNo" th:field="*{instPayChequeNo}" placeholder="Enter Cheque Number">
+        </div>
+        <div class="form-group">
+            <label for="instPayChequeDate">Cheque Date (if applicable)</label>
+            <input type="text" class="form-control hidden" id="instPayChequeDate" th:field="*{instPayChequeDate}" placeholder="Enter Cheque Date">
+        </div>
+        <div class="form-group">
+            <label for="instPayChequeBank">Cheque Bank (if applicable)</label>
+            <input type="text" class="form-control hidden" id="instPayChequeBank" th:field="*{instPayChequeBank}" placeholder="Enter Cheque Bank">
+        </div>
+        <div class="form-group">
+            <label for="student">Student</label>
+            <select id="student" th:field="*{studentMaster}" class="form-control">
+                <option value="" disabled>Select a student</option>
+                <option th:each="student : ${listStudents}"
+                        th:value="${student.studentId}"
+                        th:text="${student.studentFirstName} + ' ' + ${student.studentLastName}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success btn-rounded">Update</button>
+        <button type="button" class="btn btn-primary btn-rounded" onclick="window.location.href='/StudentInstallments'">Back</button>
+    </form>
+</div>
+
+</body>
+</html>

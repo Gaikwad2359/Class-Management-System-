@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Laptop Allocation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background color */
+        }
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff; /* White container background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+        }
+        h1, .page-title {
+            color: #4b0082; /* Indigo color for heading */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Light text shadow */
+        }
+        .btn-success {
+            background-color: #32cd32; /* Lime green color for buttons */
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3); /* Green shadow effect */
+        }
+        .btn-primary {
+            background-color: #1e90ff; /* Dodger blue color for buttons */
+            border-color: #1e90ff;
+            box-shadow: 0px 0px 10px rgba(30, 144, 255, 0.3); /* Blue shadow effect */
+        }
+        .btn-rounded {
+            border-radius: 20px;
+        }
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="page-title">Add LaptopAllocation</h1>
+    <form th:action="@{/AddLaptopAllocation}" th:object="${laptopAllocation}" method="post">
+        <div class="form-group">
+            <label for="laptopCost">Laptop Cost</label>
+            <input type="number" class="form-control" id="laptopCost" th:field="*{laptopCost}" placeholder="Enter Laptop Cost">
+        </div>
+        <div class="form-group">
+            <label for="allocationDate">Allocation Date</label>
+            <input type="date" class="form-control" id="allocationDate" th:field="*{allocationDate}" placeholder="Enter Aallocation Date">
+        </div>
+        <div class="form-group">
+            <label for="remarks">Allocation Remarks</label>
+            <input type="text" class="form-control" id="remarks" th:field="*{remarks}" placeholder="Enter Remarks">
+        </div>
+        <div class="form-group">
+            <label for="laptopMaster">Laptop Serial No</label>
+            <select id="laptopMaster" th:field="*{laptopMaster}" class="form-control">
+                <option value="" disabled selected>Select a Laptop Serial no</option>
+                <option th:each="laptop : ${listLaptops}"
+                        th:value="${laptop.laptopId}"
+                        th:text="${laptop.laptopSerialNo}"></option>
+            </select>
+        </div>
+        
+         <div class="form-group">
+            <label for="studentMaster">Student First Name</label>
+            <select id="studentMaster" th:field="*{studentMaster}" class="form-control">
+                <option value="" disabled selected>Select a student Name</option>
+                <option th:each="student : ${listStudents}"
+                        th:value="${student.studentId}"
+                        th:text="${student.studentFirstName}"></option>
+            </select>
+        </div>
+        
+        <button type="submit" class="btn btn-success btn-rounded">Add Laptop Allcoation</button>
+        <button type="button" class="btn btn-primary btn-rounded" onclick="window.location.href='/LaptopAllocations'">Back</button>
+    </form>
+</div>
+</body>
+</html>

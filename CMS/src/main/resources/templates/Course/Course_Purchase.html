@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Purchase</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Purchase Course</h1>
+    
+    <!-- Display Course Details -->
+    <div class="card mb-4">
+        <div class="card-header">
+            Course Details
+        </div>
+        <div class="card-body">
+            <h5 class="card-title" th:text="${course.courseName}">Course Name</h5>
+            <p class="card-text"><strong>Description:</strong> <span th:text="${course.courseDesc}">Course Description</span></p>
+            <p class="card-text"><strong>Fees:</strong> <span th:text="${course.courseFees}">Course Fees</span> INR</p>
+            <p class="card-text"><strong>Start Date:</strong> <span th:text="${course.courseStartDate}">Course Start Date</span></p>
+            <p class="card-text"><strong>End Date:</strong> <span th:text="${course.courseEndDate}">Course End Date</span></p>
+        </div>
+    </div>
+
+    <!-- Purchase Form -->
+    <form th:action="@{/Course/purchase/{id}(id=${course.courseId})}" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="qualification">Qualification</label>
+            <input type="text" class="form-control" id="qualification" name="qualification" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="mobile">Mobile</label>
+            <input type="text" class="form-control" id="mobile" name="mobile" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Proceed to Payment</button>   
+        <a href="/Course" class="btn btn-secondary">Back</a>
+    </form>
+</div>
+</body>
+</html>

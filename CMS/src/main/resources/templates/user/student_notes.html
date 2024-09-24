@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Notes</title>
+    <link rel="stylesheet" href="path/to/your/css/styles.css"> <!-- Link to your CSS file -->
+    <style>
+        /* Container styling */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f4f4f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Heading styling */
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* List styling */
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        li:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        /* Note title styling */
+        h2 {
+            font-size: 18px;
+            color: #444;
+            margin: 0;
+        }
+
+        /* Button styling */
+        .view-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+        }
+
+        .view-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .view-button:active {
+            background-color: #003d80;
+            transform: scale(1);
+        }
+         .links {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .links a {
+            display: inline-block;
+            font-size: 18px;
+            color: #fff;
+            background-color: rgb(0, 128, 192);
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 10px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .links a:hover {
+            background-color: rgb(0, 128, 192);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .links a:active {
+            background-color: rgb(0, 128, 192);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Notes for Your Batches</h1>
+
+        <!-- Check if there are any notes -->
+        <div th:if="${#lists.isEmpty(notes)}">
+            <p>No notes available for your batches at the moment.</p>
+        </div>
+
+        <!-- List of Notes -->
+        <div th:if="${!#lists.isEmpty(notes)}">
+            <ul>
+                <li th:each="note : ${notes}">
+                    <div>
+                        <!-- Display Note Title -->
+                        <h2 th:text="${note.title}">Note Title</h2>
+                        <!-- Button to view the PDF -->
+                        <a th:href="@{/view/{id}(id=${note.id})}" class="view-button">View</a>
+
+                    </div>
+                </li>
+            </ul>
+        </div>
+         <div class="links">
+        	<a href="http://localhost:9191/user/user-dashboard">Back</a>
+    	</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Faculty</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background color */
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff; /* White container background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+        }
+
+        h1, .page-title {
+            color: #4b0082; /* Indigo color for heading */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Light text shadow */
+        }
+
+        .btn-success {
+            background-color: #32cd32; /* Lime green color for buttons */
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3); /* Green shadow effect */
+        }
+
+        .btn-primary {
+            background-color: #1e90ff; /* Dodger blue color for buttons */
+            border-color: #1e90ff;
+            box-shadow: 0px 0px 10px rgba(30, 144, 255, 0.3); /* Blue shadow effect */
+        }
+
+        .btn-rounded {
+            border-radius: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="page-title">Add Faculty</h1>
+    <form th:action="@{/AddFaculty}" th:object="${faculty}" method="post">
+        <div class="form-group">
+            <label for="facultyFirstName">First Name</label>
+            <input type="text" class="form-control" id="facultyFirstName" th:field="*{facultyFirstName}" placeholder="Enter first name">
+        </div>
+        <div class="form-group">
+            <label for="facultyMiddleName">Middle Name</label>
+            <input type="text" class="form-control" id="facultyMiddleName" th:field="*{facultyMiddleName}" placeholder="Enter middle name">
+        </div>
+        <div class="form-group">
+            <label for="facultyLastName">Last Name</label>
+            <input type="text" class="form-control" id="facultyLastName" th:field="*{facultyLastName}" placeholder="Enter last name">
+        </div>
+        <div class="form-group">
+            <label for="facultyMobileNo">Mobile No</label>
+            <input type="text" class="form-control" id="facultyMobileNo" th:field="*{facultyMobileNo}" placeholder="Enter mobile number">
+        </div>
+        <div class="form-group">
+            <label for="facultyEmailId">Email ID</label>
+            <input type="email" class="form-control" id="facultyEmailId" th:field="*{facultyEmailId}" placeholder="Enter email address">
+        </div>
+        <div class="form-group">
+            <label for="facultyAlternateMobileNumber">Alternate Mobile Number</label>
+            <input type="text" class="form-control" id="facultyAlternateMobileNumber" th:field="*{facultyAlternateMobileNumber}" placeholder="Enter alternate mobile number">
+        </div>
+        <div class="form-group">
+            <label for="facultyReference">Reference</label>
+            <input type="text" class="form-control" id="facultyReference" th:field="*{facultyReference}" placeholder="Enter reference">
+        </div>
+        <div class="form-group">
+            <label for="facultyStatus">Status</label>
+            <input type="text" class="form-control" id="facultyStatus" th:field="*{facultyStatus}" placeholder="Enter status">
+        </div>
+        <div class="form-group">
+            <label for="facultyBalance">Balance</label>
+            <input type="text" class="form-control" id="facultyBalance" th:field="*{facultyBalance}" placeholder="Enter balance">
+        </div>
+        <div class="form-group">
+            <label for="City">City</label>
+            <select id="City" th:field="*{cityMaster.cityId}" class="form-control">
+                <option value="" disabled selected>Select a city</option>
+                <option th:each="city : ${listCities}" th:value="${city.cityId}" th:text="${city.cityName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="State">State</label>
+            <select id="State" th:field="*{stateMaster.stateId}" class="form-control">
+                <option value="" disabled selected>Select a state</option>
+                <option th:each="state : ${listStates}" th:value="${state.stateId}" th:text="${state.stateName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Country">Country</label>
+            <select id="Country" th:field="*{countryMaster.countryId}" class="form-control">
+                <option value="" disabled selected>Select a country</option>
+                <option th:each="country : ${listCountries}" th:value="${country.countryId}" th:text="${country.countryName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Qualification">Qualification</label>
+            <select id="Qualification" th:field="*{qualificationMaster.qualId}" class="form-control">
+                <option value="" disabled selected>Select a qualification</option>
+                <option th:each="qualification : ${listQualifications}" th:value="${qualification.qualId}" th:text="${qualification.qualName}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success btn-rounded">Add Faculty</button>
+        <button type="button" class="btn btn-primary btn-rounded" onclick="window.location.href='/Faculties'">Back</button>
+    </form>
+</div>
+</body>
+</html>

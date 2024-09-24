@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Faculty Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background color */
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff; /* White container background */
+            padding: 20px;
+            border: 1px solid #ced4da; /* Gray border */
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #4b0082; /* Indigo color for heading */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Light text shadow */
+        }
+
+        .table {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .detail-label {
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #1e90ff; /* Dodger blue color for buttons */
+            border-color: #1e90ff;
+            box-shadow: 0px 0px 10px rgba(30, 144, 255, 0.3); /* Blue shadow effect */
+        }
+
+        .btn-rounded {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Faculty Details</h2>
+    <table class="table table-bordered">
+        <tr>
+            <td class="detail-label">Faculty ID:</td>
+            <td th:text="${faculty.facultyId}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">First Name:</td>
+            <td th:text="${faculty.facultyFirstName}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Middle Name:</td>
+            <td th:text="${faculty.facultyMiddleName}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Last Name:</td>
+            <td th:text="${faculty.facultyLastName}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Mobile No:</td>
+            <td th:text="${faculty.facultyMobileNo}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Email ID:</td>
+            <td th:text="${faculty.facultyEmailId}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Alternate Mobile Number:</td>
+            <td th:text="${faculty.facultyAlternateMobileNumber}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Reference:</td>
+            <td th:text="${faculty.facultyReference}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Status:</td>
+            <td th:text="${faculty.facultyStatus}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Balance:</td>
+            <td th:text="${faculty.facultyBalance}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">City:</td>
+            <td th:text="${faculty.cityMaster != null ? faculty.cityMaster.cityName : 'N/A'}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">State:</td>
+            <td th:text="${faculty.stateMaster != null ? faculty.stateMaster.stateName : 'N/A'}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Country:</td>
+            <td th:text="${faculty.countryMaster != null ? faculty.countryMaster.countryName : 'N/A'}"></td>
+        </tr>
+        <tr>
+            <td class="detail-label">Qualification:</td>
+            <td th:text="${faculty.qualificationMaster != null ? faculty.qualificationMaster.qualName : 'N/A'}"></td>
+        </tr>
+    </table>
+    <div class="text-center">
+        <a href="/Faculties" class="btn btn-primary btn-rounded">Back</a>
+    </div>
+</div>
+</body>
+</html>

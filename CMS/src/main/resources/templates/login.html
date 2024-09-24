@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Login Page</title>
+	<style>
+		/* Body and General Styling */
+		body {
+			font-family: 'Poppins', sans-serif;
+			background: radial-gradient(circle at 50% 50%, #6a1b9a, #c2185b, #f48fb1);
+			height: 100vh;
+			margin: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+		}
+
+		/* Card Container */
+		.container {
+			max-width: 500px;
+			width: 100%;
+			background-color: #fff;
+			border-radius: 12px;
+			padding: 25px;
+			box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+			transform: scale(1);
+			animation: fadeIn 1.2s ease-in-out;
+			position: relative;
+		}
+
+		.card {
+			background-color: #fff;
+			border-radius: 12px;
+			box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s ease-in-out;
+		}
+
+		.card:hover {
+			transform: translateY(-10px);
+		}
+
+		.card-header {
+			background-color: #6a1b9a;
+			color: #fff;
+			text-align: center;
+			font-size: 1.7rem;
+			font-weight: 700;
+			padding: 15px;
+			border-radius: 12px 12px 0 0;
+			text-transform: uppercase;
+			letter-spacing: 1.5px;
+			animation: slideDown 0.8s ease-out;
+		}
+
+		.card-body {
+			padding: 30px;
+		}
+
+		/* Form Controls */
+		.form-control {
+			width: 100%;
+			padding: 12px;
+			border-radius: 8px;
+			border: 1px solid #ddd;
+			font-size: 1rem;
+			background-color: #f9f9f9;
+			transition: all 0.3s ease;
+			margin-bottom: 20px;
+			box-shadow: inset 0px 2px 5px rgba(0, 0, 0, 0.05);
+		}
+
+		.form-control:focus {
+			border-color: #6a1b9a;
+			box-shadow: 0 0 10px rgba(106, 27, 154, 0.4);
+			outline: none;
+		}
+
+		.form-control:hover {
+			box-shadow: 0 0 8px rgba(106, 27, 154, 0.1);
+		}
+
+		label {
+			font-size: 1rem;
+			font-weight: 600;
+			color: #6a1b9a;
+			margin-bottom: 10px;
+			display: inline-block;
+		}
+
+		/* Button Styles */
+		.btn-primary {
+			background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+			border: none;
+			width: 100%;
+			padding: 15px;
+			font-size: 1.2rem;
+			font-weight: bold;
+			color: white;
+			border-radius: 8px;
+			cursor: pointer;
+			transition: all 0.4s ease;
+			box-shadow: 0px 10px 20px rgba(106, 27, 154, 0.3);
+		}
+
+		.btn-primary:hover {
+			background: linear-gradient(135deg, #5e35b1, #9c27b0);
+			transform: translateY(-3px);
+			box-shadow: 0px 15px 30px rgba(106, 27, 154, 0.4);
+		}
+
+		/* Error and Success Messages */
+		.text-danger, .text-success {
+			text-align: center;
+			font-size: 1rem;
+			margin-top: 10px;
+		}
+
+		.text-danger {
+			color: #e53935;
+		}
+
+		.text-success {
+			color: #4caf50;
+		}
+
+		/* Animations */
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes slideDown {
+			from {
+				transform: translateY(-50px);
+			}
+			to {
+				transform: translateY(0);
+			}
+		}
+	</style>
+</head>
+<body>
+	<section>
+		<div class="container">
+			<div class="card">
+				<div class="card-header">Login Page</div>
+
+				<!-- Error Message if Login Fails -->
+				<th:block th:if="${param.error}">
+					<p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+				</th:block>
+
+				<!-- Success Message if Logout Successful -->
+				<th:block th:if="${param.logout}">
+					<p class="text-success">Logout Successfully</p>
+				</th:block>
+
+				<div class="card-body">
+					<form action="/studentLogin" method="post">
+						<div class="mb-3">
+							<label>Enter Email</label>
+							<input type="text" name="username" class="form-control" placeholder="Email Address">
+						</div>
+
+						<div class="mb-3">
+							<label>Enter Password</label>
+							<input type="password" name="password" class="form-control" placeholder="Password">
+						</div>
+
+						<button class="btn btn-primary">Login</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

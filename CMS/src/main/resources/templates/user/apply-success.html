@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Application Successful</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Container Styles */
+        .container {
+            width: 80%;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Heading Styles */
+        h2 {
+            color: #4caf50; /* Green color for success */
+            margin-bottom: 20px;
+        }
+
+        /* Paragraph Styles */
+        p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        /* Link Styles */
+        a {
+            text-decoration: none;
+            color: #6a1b9a; /* Purple color */
+            font-weight: bold;
+            font-size: 1.1em;
+            border: 2px solid #6a1b9a;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: #6a1b9a; /* Purple color */
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Your application was submitted successfully!</h2>
+    <p>Thank you for applying.</p>
+    <a th:href="@{/user/user-dashboard}">Back</a>
+</div>
+
+</body>
+</html>

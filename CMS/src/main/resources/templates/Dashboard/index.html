@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+    <style>
+        body {
+            padding-top: 56px; /* Adjust to the height of your navbar */
+            margin: 0;
+        }
+        #sidebar {
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        #sidebar .sidebar-header {
+            padding: 20px;
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+        }
+        #sidebar .sidebar-header img {
+            width: 180px;
+            height: 70px;
+        }
+        #sidebar .nav {
+            padding-top: 20px;
+        }
+        #sidebar .nav-item {
+            margin-bottom: 10px;
+        }
+        #sidebar .nav-item a {
+            padding: 15px 20px;
+            color: #343a40;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        #sidebar .nav-item a:hover {
+            background-color: #e9ecef;
+            color: #343a40;
+        }
+        #sidebar .nav-item a i {
+            margin-right: 10px;
+        }
+        .navbar {
+            background-color: #343a40;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            left: 250px;
+            width: calc(100% - 250px);
+            z-index: 1000;
+        }
+        .navbar-nav {
+            margin-left: auto;
+        }
+        .navbar-nav .nav-item {
+            margin-right: 20px;
+        }
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .navbar-nav .nav-link:hover {
+            text-decoration: underline;
+        }
+        .navbar-nav .nav-link.active {
+            text-decoration: underline;
+        }
+        main {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .dashboard-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: white;
+            color: black;
+        }
+        .dashboard-card h2 {
+            margin-bottom: 10px;
+        }
+        .dashboard-card p {
+            margin-bottom: 0;
+            font-size: 1.2em;
+        }
+        .gradient-card {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
+        .gradient-card h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .gradient-card p {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .gradient-card button {
+            background-color: white;
+            color: #1e3c72;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .gradient-card button:hover {
+            background-color: #ddd;
+        }
+        #sidebar .nav-item a .fas {
+            margin-right: 10px;
+        }
+        .btn-remainder {
+            background-color: #dc3545; /* Red color for emphasis */
+        }
+
+        .btn-remainder:hover {
+            background-color: #c82333;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-remainder:active {
+            background-color: #a71d2a;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <img th:src="@{/images/ZplusLogo.png}" alt="Company Logo">
+        </div>
+          
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/dashboard}">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/reports}">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Reports</span>
+                </a>
+            </li>
+            
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/notifications}">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications </span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/DailyUpdates}">
+                    <i class="fas fa-calendar-day"></i>
+                    <span>Daily Updates </span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/logout}">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+             
+        </ul>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<form action="/report/send-reminder" method="post">
+            <button type="submit" class="btn-remainder">Send Reminder</button>
+        </form>
+        <div class="navbar-nav">
+			
+            <a class="nav-item nav-link" th:href="@{/home}">Home</a>
+            
+             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Services
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" th:href="@{/services/software-development}">Software Development</a>
+                    <a class="dropdown-item" th:href="@{/services/hardware-sales}">Hardware Sales</a>
+                    <a class="dropdown-item" th:href="@{/services/training-certifications}">Training and Certifications</a>
+                    <a class="dropdown-item" th:href="@{/services/student-augmentation}">Student Augmentation</a>
+                    <a class="dropdown-item" th:href="@{/services/project-guidance}">Project Guidance</a>
+                </div>
+            </li>
+            
+            
+             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Courses
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					 <a class="dropdown-item" th:href="@{/courses/FullStackDevelopment}">Java Full Stack Development</a>
+					 <a class="dropdown-item" th:href="@{/courses/DataStructure}">Data Structure and Algorithms</a>
+					   <a class="dropdown-item" th:href="@{/courses/Angular}">Angular Development</a>
+                    <a class="dropdown-item" th:href="@{/courses/CProgramming}">C Programming </a>
+                    <a class="dropdown-item" th:href="@{/courses/coreJAVA}">Core Java</a>
+                    <a class="dropdown-item" th:href="@{/courses/AdvancedJava}">Advanced Java</a>
+                </div>
+            </li>
+            
+            
+            <a class="nav-item nav-link" th:href="@{/about}">About Us</a>
+            <a class="nav-item nav-link" th:href="@{/contact}">Contact Us</a>
+            
+        </div>
+    </nav>
+
+    <main>
+		<div>
+			<h1>Welcome To Admin Dashboard [[${user.name}]] !!!</h1>
+		</div>
+        <!-- Overview Cards -->
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/Batches}'|" style="cursor: pointer;">
+            <h2>Total Batches</h2>
+            <p th:text="${dashboard.totalBatches}"></p>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/Students}'|" style="cursor: pointer;">
+            <h2>Total Students</h2>
+            <p th:text="${dashboard.totalStudents}"></p>
+        </div>
+    </div>
+
+    <!-- Courses -->
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/Course}'|" style="cursor: pointer;">
+            <h2>Total Courses</h2>
+            <p th:text="${dashboard.totalCourses}"></p>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/Faculties}'|" style="cursor: pointer;">
+            <h2>Total Faculties</h2>
+            <p th:text="${dashboard.totalFaculties}"></p>
+        </div>
+    </div>   
+    
+</div>
+
+
+
+<!-- New Dashboard Rows -->
+<div class="row">
+    <!-- Student Batches -->
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/StudentBatches}'|" style="cursor: pointer;">
+            <h2>Total Student Batches</h2>
+            <p th:text="${dashboard.totalStudentBatches}"></p>
+        </div>
+    </div>
+
+    <!-- Qualifications -->
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/Qualifications}'|" style="cursor: pointer;">
+            <h2>Total Qualifications</h2>
+            <p th:text="${dashboard.totalQualifications}"></p>
+        </div>
+    </div>
+
+    <!-- Laptop Allocations -->
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/LaptopAllocations}'|" style="cursor: pointer;">
+            <h2>Total Laptop Allocations</h2>
+            <p th:text="${dashboard.totalLaptopAllocations}"></p>
+        </div>
+    </div>
+
+    <!-- Student Installments -->
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/StudentInstallments}'|" style="cursor: pointer;">
+            <h2>Total Student Installments</h2>
+            <p th:text="${dashboard.totalStudentInstallments}"></p>
+        </div>
+    </div>
+    </div>
+
+<!-- Additional Cards -->
+<div class="row">
+    <!-- Laptops -->
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/Laptops}'|" style="cursor: pointer;">
+            <h2>Total Laptops</h2>
+            <p th:text="${dashboard.totalLaptops}"></p>
+        </div>
+    </div>
+    
+         <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/Countries}'|" style="cursor: pointer;">
+            <h2>Total Countries</h2>
+            <p th:text="${dashboard.totalCountries}"></p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/States}'|" style="cursor: pointer;">
+            <h2>Total States</h2>
+            <p th:text="${dashboard.totalStates}"></p>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/Cities}'|" style="cursor: pointer;">
+            <h2>Total Cities</h2>
+            <p th:text="${dashboard.totalCities}"></p>
+        </div>
+    </div>   
+</div>
+
+    
+    <div class="row">
+     <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/StudentReferences}'|" style="cursor: pointer;">
+            <h2>Total Student Refereces </h2>
+        </div>
+    </div>
+    
+     <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/notes}'|" style="cursor: pointer;">
+            <h2>Total Student Notes </h2>
+        </div>
+    </div>
+    
+    
+     <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/admin/register}'|" style="cursor: pointer;">
+            <h2> Student <br> Register </h2>
+        </div>
+    </div>
+    
+    
+     <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/admin/registerAdmin}'|" style="cursor: pointer;">
+            <h2> Admin <br> Register </h2>
+        </div>
+    </div>
+    
+</div>
+
+
+ 
+ <div class="row">
+    <div class="col-md-3">
+        <div class="card gradient-card" th:onclick="|window.location.href='@{/applyForms}'|" style="cursor: pointer;">
+            <h2>Total Apply Forms </h2>
+            <p th:text="${dashboard.totalApplyForm}"></p>
+        </div>
+    </div>
+    
+    
+    </div>
+ 
+ 
+    </main>
+</body>
+</html>

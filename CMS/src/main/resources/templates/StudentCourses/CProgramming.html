@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Programming</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+		
+		.contact-heading1 {
+    font-size: 2.5em;  /* Adjust the size as needed */
+    font-weight: bold; /* Make the text bold */
+    color: #333333;    /* Set the text color */
+    text-align: center; /* Center the text */
+    margin-top: 1cm;    /* Add top margin if needed */
+}
+
+        body {
+            padding-top: 56px; /* Adjust to the height of your navbar */
+            margin: 0;
+        }
+        #sidebar {
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        #sidebar .sidebar-header {
+            padding: 20px;
+            background-color: rgb(255, 255, 255);
+            color: #fff;
+            text-align: center;
+        }
+        #sidebar .sidebar-header img {
+            width: 120px;
+            height: 70px;
+        }
+        #sidebar .nav {
+            padding-top: 20px;
+        }
+        #sidebar .nav-item {
+            margin-bottom: 10px;
+        }
+        #sidebar .nav-item a {
+            padding: 15px 20px;
+            color: #343a40;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        #sidebar .nav-item a:hover {
+            background-color: #e9ecef;
+            color: #343a40;
+        }
+        #sidebar .nav-item a i {
+            margin-right: 10px;
+        }
+        .navbar {
+            background-color: #343a40;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            left: 250px;
+            width: calc(100% - 250px);
+            z-index: 1000;
+        }
+        .navbar-nav {
+            margin-left: auto;
+        }
+        .navbar-nav .nav-item {
+            margin-right: 20px;
+        }
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .navbar-nav .nav-link:hover {
+            text-decoration: underline;
+        }
+        .navbar-nav .nav-link.active {
+            text-decoration: underline;
+        }
+        main {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group span {
+            color: red;
+            font-size: 0.9em;
+        }
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #218838;
+        }
+        .contact-heading {
+            font-size: 2.2em;
+            font-weight: bold;
+            color: #ffffff; 
+            text-align: center;
+            margin-top: 20px;
+        }
+        .sub-heading {
+            font-size: 1.2em;
+            color: #555;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .description {
+            font-size: 1.2em;
+            color: #777;
+            text-align: center;
+            margin-bottom: 120px;
+        }
+        
+        
+       .info-box {
+            padding: 20px;
+            color: white;
+            text-align: center;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
+        }
+        .contact-details, .office-hours {
+            background-color: #000033; /* Dark navy blue */
+        }
+        .address {
+            background-color: #F0E68C; /* Khaki color */
+            color: #000; /* Black text */
+        }
+        .info-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em; /* Adjusting heading size */
+        }
+        .info-box p {
+            margin: 0;
+            font-size: 1em; /* Smaller text size */
+        }
+        .no-gap-row {
+            margin-right: 0;
+            margin-left: 0;
+        }
+        .no-gap-row > .col-md-4 {
+            padding-left: 0;
+            padding-right: 0;
+            display: flex;
+        }
+        
+         .map-container {
+            margin-top: 60px;
+        }
+        .map-iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+        }
+        
+        .container {
+    width: 50%;
+    margin: auto;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    width: 20%;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 75%;
+}
+
+button[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+        
+      .form-group {
+            margin-bottom: 0.5cm; /* Adds gap between elements within the form group */
+        }
+
+        textarea {
+            width: 100%; /* Ensure textarea takes up full width of its container */
+            padding: 10px;
+            box-sizing: border-box; /* Include padding in the element's total width and height */
+        }
+
+        .send-button {
+            background-color: #F0E68C;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .send-button:hover {
+            background-color: DarkBlue;
+            color: white;
+        }
+        
+        .form-group {
+            text-align: right; /* Aligns content to the right */
+        }
+        
+        .form-group {
+             margin-bottom: 0.5cm;
+        }
+        
+        
+        
+        
+        
+/* Contact Information Section */
+.contact-info-section {
+    background-color: #001f3f; /* Navy blue color */
+    color: #ffffff; /* White text color */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+
+/* Contact Information Section */
+.contact-info-section {
+    background-color: #001f3f; /* Navy blue color */
+    color: #ffffff; /* White text color */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+
+.contact-info-section {
+    background-color: #001f3f; /* Darker navy blue color */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+
+
+.contact-info-section::after {
+    content: "";
+    display: block;
+    clear: both;
+    border-top: 1px solid #ffffff;
+    margin-top: 20px;
+}
+
+
+
+.contact-info-item {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.contact-info-item i {
+    display: block;
+    margin-bottom: 10px;
+    color: #ffd700; /* Gold color for icons */
+}
+
+
+/* Contact Info Item */
+.contact-info-item {
+    flex: 1;
+    margin: 0 10px;
+}
+
+
+
+.contact-info-item {
+    flex: 1;
+    margin: 0 10px;
+}
+
+
+     
+.contact-info-content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+
+.contact-info-content p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* Contact Info Content */
+.contact-info-content {
+    font-size: 16px;
+}
+
+/* Text Styling */
+.contact-info-content p {
+    margin: 5px 0;
+}
+
+.contact-info-content {
+    display: inline-block;
+}
+
+
+.contact-info-content p {
+    margin: 5px 0;
+}
+
+
+.contact-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.contact-heading {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+
+.footer-section {
+    background-color: #001f3f; /* Dark navy blue background color */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-top: 1px solid #ffffff; /* Line at the top */
+}
+
+
+.footer-section::after {
+    content: "";
+    display: block;
+    clear: both;
+    margin-top: 20px;
+    border-top: 1px solid #ffffff; /* Line at the bottom */
+}
+
+
+.footer-column {
+    flex: 1;
+    margin: 0 10px;
+}
+
+
+.footer-column {
+    flex: 1;
+    margin: 0 10px;
+}
+
+
+.footer-logo {
+    max-width: 120px; /* Adjust the size of the logo */
+    margin-top: 10px;
+}
+
+
+
+.footer-heading {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ffcc00; /* Emphasizes the heading with a different color */
+}
+
+.footer-heading {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ffcc00; /* Emphasizes the heading with a different color */
+}
+
+
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin: 5px 0;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #ffcc00; /* Hover effect for social icons */
+}
+
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px; /* Space between social icons and mini images */
+}
+
+.social-icons a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #ffcc00; /* Hover effect for social icons */
+}
+
+
+.mini-images {
+    display: flex;
+    justify-content: flex-start; /* Align images to the left */
+    gap: 10px; /* Space between each image */
+}
+
+.mini-img {
+    max-width: 40px; /* Small size for the images */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Optional: rounded corners */
+}
+
+
+.footer-copyright {
+    background-color: black;
+    text-align: center;
+    height: 1.5cm; /* Set the height to 1.5 cm */
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: center; /* Vertically center the text */
+    justify-content: center; /* Horizontally center the text */
+    margin-top: 0; /* Remove any space above the footer */
+    padding: 0; /* Remove any padding */
+}
+
+.footer-copyright p {
+    margin: 0; /* Ensure no extra spacing around the text */
+}
+
+.gold-bold {
+    color: gold;
+    font-weight: bold;
+}
+
+.with-top-space {
+            margin-top: 2cm; /* 2cm space at the top */
+        }
+        
+       
+
+        /* Styling for the course title */
+        h1 {
+            font-size: 50px;
+            color: rgb(0, 0, 0);
+            margin-bottom: 20px;
+        }
+        
+         /* Styling for the course image */
+        .course-image {
+            width: 450px;
+            max-width: 350px;
+            height: 400px;
+            border-radius: 2px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            float: right;
+            margin-left: 20px;
+            margin-top: 20px;        }
+
+        /* Styling for the course description */
+        .course-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Styling for the list */
+        .course-description ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .course-description li {
+            margin-bottom: 10px;
+        } bodybutton {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .download-button {
+            display: inline-block;
+            font-size: 16px;
+            color: #fff; /* Text color */
+            background-color: rgb(128, 0, 128); /* Button background color */
+            text-decoration: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px; /* Space between button and image */
+        }
+        .download-button:hover,
+        .download-button:focus,
+        .download-button:active {
+            color: #fff; /* Keep text color white */
+            background-color: #0056b3; /* Darker background color on hover, focus, and active states */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        
+h6 {
+    color: #000000; /* Set the text color to black */
+    font-size: 1em; /* Adjust the font size if needed */
+    margin: 0; /* Adjust margin to your preference */
+    font-weight: normal; /* Optional: Set font weight */
+}
+
+
+
+h5 {
+    color: rgb(255, 255, 255); /* Set the text color to black */
+    font-size: 1em; /* Adjust the font size if needed */
+    margin: 0; /* Adjust margin to your preference */
+    font-weight: normal; /* Optional: Set font weight */
+}
+
+    </style>
+</head>
+<body>
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <img th:src="@{/images/e-deeshaLogo.png}" alt="Company Logo">
+            <h6>E-deesha Technologies</h6>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/user/user-dashboard}">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+	            
+	          <li class="nav-item">
+			    <a class="nav-link" th:href="@{/user/StudentReports}">
+			        <i class="fas fa-chart-line"></i>
+			        <span>Reports</span>
+			    </a>
+			</li>
+			<li class="nav-item">
+                <a class="nav-link" th:href="@{/user/Student/notifications}">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/user/student/updates}">
+                    <i class="fas fa-calendar-day"></i>
+                    <span>Daily Updates </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/logout}">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" th:href="@{/user/student/home}">Home</a>
+
+			<li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Services
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" th:href="@{/user/student/services/software-development}">Software Development</a>
+                    <a class="dropdown-item" th:href="@{/user/student/services/hardware-sales}">Hardware Sales</a>
+                    <a class="dropdown-item" th:href="@{/user/student/services/training-certifications}">Training and Certifications</a>
+                    <a class="dropdown-item" th:href="@{/user/student/services/student-augmentation}">Student Augmentation</a>
+                    <a class="dropdown-item" th:href="@{/user/student/services/project-guidance}">Project Guidance</a>
+                </div>
+            </li>
+            
+             <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Courses
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					 <a class="dropdown-item" th:href="@{/user/student/courses/FullStackDevelopment}">Java Full Stack Development</a>
+					 <a class="dropdown-item" th:href="@{/user/student/courses/DataStructure}">Data Structure and Algorithms</a>
+					   <a class="dropdown-item" th:href="@{/user/student/courses/Angular}">Angular Development</a>
+                    <a class="dropdown-item" th:href="@{/user/student/courses/CProgramming}">C Programming </a>
+                    <a class="dropdown-item" th:href="@{/user/student/courses/coreJAVA}">Core Java</a>
+                    <a class="dropdown-item" th:href="@{/user/student/courses/AdvancedJava}">Advanced Java</a>
+                </div>
+            </li>
+            
+            
+            <a class="nav-item nav-link" th:href="@{/user/student/about}">About Us</a>
+            <a class="nav-item nav-link" th:href="@{/user/student/contact}">Contact Us</a>
+        </div>
+    </nav>
+
+
+    <main>
+		
+        <h1 th:text="${courseName}">C Programming</h1>
+        <img th:src="@{/images/cprogramming.png}" alt="Java Full Stack Development" class="course-image">
+    <div class="course-description">
+       <p><strong>C is a foundational programming language that has influenced many modern languages and is still widely used today. Here's why you should learn C programming: </strong></p>
+        <ul>
+            <li><strong>Foundation of Programming:</strong> Learning C provides a strong foundation in programming concepts, as many languages are based on or influenced by C.</li>
+            <li><strong>Efficient and Fast:</strong> C is known for its efficiency and speed, making it ideal for developing performance-critical applications like operating systems and embedded systems.</li>
+            <li><strong>Low-Level Access:</strong> C allows you to interact directly with memory and hardware, providing greater control over system resources and performance.</li>
+            <li><strong>Portability:</strong> C code can be compiled and run on virtually any platform, making it a highly portable language.</li>
+	 <a href="/pdf/CProgramming.pdf" class="download-button">DOWNLOAD SYLLABUS</a>
+	 <a href="/user/applyCourse"  class="download-button">APPLY NOW</a>
+		
+        </ul>
+    </div>
+		
+		
+		
+ <!-- Contact Information Section -->
+ <div class="with-top-space">
+<div class="contact-info-section">
+    <div class="contact-info-item">
+        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+        <div class="contact-info-content">
+    <h3 class="contact-heading">Find Us</h3>
+    <p><strong class="gold-bold">Head Office:</strong> Rajdhani Complex, Office No. A/409, 4th Floor, Near Shankar Maharaj Math, Pune-Satara Road, Pune 411043</p>
+    <p><strong class="gold-bold">Branch 2:</strong> 114 Pearl Plaza, opposite to Andheri Station, Next to Mcd, Andheri West, Mumbai Maharashtra 400058</p>
+</div>
+
+    </div>
+
+    <div class="contact-info-item">
+        <i class="fas fa-phone-volume" aria-hidden="true"></i>
+        <div class="contact-info-content">
+            <h3 class="contact-heading">Call Us</h3>
+            <p>+91 6362803282</p>
+            <p>+91 9637630613</p>
+            <p>+91 9850083751</p>
+        </div>
+    </div>
+
+    <div class="contact-info-item">
+        <i class="fas fa-envelope" aria-hidden="true"></i>
+        <div class="contact-info-content">
+            <h3 class="contact-heading">Mail Us</h3>
+            <p> info@zpluscybertech.com</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<div class="footer-section">
+    <div class="footer-column">
+        <img src="/images/e-deeshaLogo.png" alt="Zplus Logo" class="footer-logo">
+        <h5>E-deesha Technologies</h5>
+    </div>
+
+    <div class="footer-column">
+        <h3 class="footer-heading">Useful Links</h3>
+        <ul class="footer-links">
+            <li><a href="/user/student/home">Home</a></li>
+ <li><a href="/user/student/about">About Us</a></li>
+<li><a href="/user/student/contact">Contact Us</a></li>
+<li><a href="/user/student/services/software-development">Services </a></li>
+<li><a href="/user/student/courses/FullStackDevelopment">Courses </a></li>
+        </ul>
+    </div>
+
+   <div class="footer-column">
+    <h3 class="footer-heading">Follow Us</h3>
+    <div class="social-icons">
+        <a href="https://www.instagram.com/zplus_cyber_tech/"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div class="mini-images">
+        <img src="/images/IAFZplus.png" alt="IAF Zplus" class="mini-img">
+        <img src="/images/IASZplus.png" alt="IAS Zplus" class="mini-img">
+        <img src="/images/IsoZplus.png" alt="Iso Zplus" class="mini-img">
+        <img src="/images/IsoZplus2.png" alt="Iso Zplus 2" class="mini-img">
+    </div>
+</div>
+    
+    
+</div>
+
+
+<!-- Other content of your footer -->
+<div class="footer-copyright">
+    <p>Copyright © 2024 <strong>Zplus Cyber Secure Technologies Pvt Ltd.</strong>  All Right Reserved</p>
+</div>
+
+    
+    
+    </main>
+</body>
+</html>

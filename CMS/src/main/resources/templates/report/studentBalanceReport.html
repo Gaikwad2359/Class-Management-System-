@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Pending Balance Report</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        /* General styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header styling */
+        .header {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0;
+        }
+
+        /* Table styling */
+        table {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #007bff;
+            color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            font-size: 16px;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Button box styling */
+        .links {
+            margin: 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Space between buttons */
+        }
+
+        .links a, .links button {
+            display: inline-block;
+            font-size: 16px;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Reminder button styling */
+        .btn-remainder {
+            background-color: #dc3545; /* Red color */
+        }
+
+        .btn-remainder:hover {
+            background-color: #c82333;
+        }
+
+        .btn-remainder:active {
+            background-color: #a71d2a;
+        }
+
+        /* PDF button styling */
+        .btn-pdf {
+            background-color: #28a745; /* Green color */
+        }
+
+        .btn-pdf:hover {
+            background-color: #218838;
+        }
+
+        .btn-pdf:active {
+            background-color: #1e7e34;
+        }
+
+        /* Back button styling */
+        .btn-back {
+            background-color: #007bff; /* Blue color */
+        }
+
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-back:active {
+            background-color: #004494;
+        }
+
+        /* Total balance styling */
+        .total-balance {
+            font-size: 18px;
+            font-weight: bold;
+            color: red; /* Changed color to red */
+            margin: 20px 0;
+        }
+
+        .message {
+            color: green;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Footer styling */
+        .footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Student Pending Balance Report</h1>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Pending Balance</th>
+            </tr>
+        </thead>
+        <tbody th:each="student : ${students}">
+            <tr>
+                <td th:text="${student.studentId}"></td>
+                <td th:text="${student.studentFirstName} + ' ' + ${student.studentLastName}"></td>
+                <td th:text="${student.studentbalance}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="total-balance">
+        Total Pending Balance: <span th:text="${totalPendingBalance}"></span>
+    </div>
+
+    <div class="links">
+        <!-- Reminder button -->
+        <form action="/report/send-reminder" method="post">
+            <button type="submit" class="btn-remainder">Send Reminder</button>
+        </form>
+        <!-- Back to Home button -->
+        <a href="/reports" class="btn-back">Back to Home</a>
+    </div>
+
+   
+</body>
+</html>

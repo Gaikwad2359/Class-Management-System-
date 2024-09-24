@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Daily Update</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f8ff;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+        h2, .page-title {
+            color: #4b0082;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn-success {
+            background-color: #32cd32;
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3);
+        }
+        .btn-primary {
+            background-color: #1e90ff;
+            border-color: #1e90ff;
+            box-shadow: 0px 0px 10px rgba(30, 144, 255, 0.3);
+        }
+        .btn-rounded {
+            border-radius: 20px;
+        }
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="page-title">Edit Daily Update</h2>
+    <form th:action="@{/UpdateDailyUpdate/{id}(id=${dailyUpdate.updateId})}" th:object="${dailyUpdate}" method="post">
+        <input type="hidden" th:field="*{updateId}">
+        <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea class="form-control" id="message" th:field="*{message}" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="text" class="form-control" id="text" th:field="*{updateDate}" required>
+        </div>
+        <div class="form-group">
+            <label for="batch">Batch:</label>
+            <select class="form-control" id="batchMaster" th:field="*{batchMaster.batchId}">
+                <option th:each="batchMaster : ${listBatches}" th:value="${batchMaster.batchId}" th:text="${batchMaster.batchName}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-rounded">Update</button>
+        <button type="button" class="btn btn-primary btn-rounded" onclick="window.location.href='/DailyUpdates'">Back</button>
+    </form>
+</div>
+</body>
+</html>

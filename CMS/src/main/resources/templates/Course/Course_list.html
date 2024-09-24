@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f8ff;
+            color: #333;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4b0082;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            background-color: #32cd32;
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #228b22;
+            border-color: #228b22;
+        }
+
+        .table {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table th, .table td {
+            color: #333;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f0f8ff;
+        }
+
+        .pagination a {
+            color: #4b0082;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .pagination a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Course List</h1>
+    <a th:href="@{/Course/new}" class="btn btn-success mb-3">Add New Course</a>
+    <center>
+        <a th:href="@{/GenerateCoursePdfReport}" class="btn btn-success mb-3">Generate PDF</a>
+        <a th:href="@{/GenerateCourseExcelReport}" class="btn btn-success mb-3">Generate Excel</a>
+    </center>
+
+    <table class="table table-striped table-responsive-md">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Fees</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.courseId}">Id</td>
+                <td th:text="${course.courseName}">Name</td>
+                <td th:text="${course.courseDesc}">Description</td>
+                <td th:text="${course.courseFees}">Fees</td>
+                <td th:text="${course.courseStartDate}">Start Date</td>
+                <td th:text="${course.courseEndDate}">End Date</td>
+                <td th:text="${course.status}">Status</td>
+                <td>
+                    <a class="btn btn-outline-primary btn-fw" th:href="@{/Course/view/{id}(id=${course.courseId})}">View</a>
+                    <a class="btn btn-outline-success btn-fw" th:href="@{/Course/edit/{id}(id=${course.courseId})}">Edit</a>
+                    <a class="btn btn-outline-danger btn-fw" th:href="@{/Course/delete/{id}(id=${course.courseId})}">Delete</a>
+                    <a class="btn btn-outline-primary btn-fw" th:href="@{/Course/purchase/{id}(id=${course.courseId})}">Purchase</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${totalPages > 1}" class="row">
+        <div class="col">
+            Total Rows : [[${totalItems}]]
+        </div>
+        <div class="col">
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <a th:if="${currentPage != i}" th:href="@{'/Course/page/' + ${i}}" class="btn btn-link">[[${i}]] </a>
+                <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;&nbsp;
+            </span>
+        </div>
+        <div class="col">
+            <a th:if="${currentPage < totalPages}" th:href="@{'/Course/page/'+${currentPage + 1}}" class="btn btn-link">Next</a>
+            <span th:unless="${currentPage < totalPages}">Next</span>
+        </div>
+        <div class="col">
+            <a th:if="${currentPage < totalPages}" th:href="@{'/Course/page/'+${totalPages}}" class="btn btn-link">Last</a>
+            <span th:unless="${currentPage < totalPages}">Last</span>
+        </div>
+        <div class="col">
+            <a th:if="${currentPage > 1}" th:href="@{'/Course/page/'+${currentPage - 1}}" class="btn btn-link">Back</a>
+            <span th:unless="${currentPage > 1}">Back</span>
+        </div>
+    </div>
+
+    <center>
+        <a href="/admin/dashboard" class="btn btn-primary">Back</a>
+    </center>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK3c8U4zzT2h9U28eWbIc9kk6z4p/5OMW8T+HtUt8u59cN3"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UOa2X6IT8E6G9cZ1Lqg8y5I1j9C4hGZZ9epeftDML1XkDA6Ok5trzOrs8Z6ztD9j"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfyyA4b24Q/4yy8H1H9y5Ht5p1L4D4IOT+n4aLHi/A38Jr5p0FY9euR5L2bM9aM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

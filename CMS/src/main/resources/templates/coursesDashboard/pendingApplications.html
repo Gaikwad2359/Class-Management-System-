@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pending Applications</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <style>
+        /* General Page Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: linear-gradient(to bottom, #f4f4f9, #fff);
+            background-size: 100% 300px;
+            background-position: 0% 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            width: 85%;
+            margin: 50px auto;
+            background-color: #ffffff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 20px;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .title {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 2.7rem;
+            margin-bottom: 30px;
+        }
+
+        /* Table Styles */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 1rem;
+            text-align: left;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeInTable 1s ease-in;
+        }
+
+        @keyframes fadeInTable {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .styled-table thead tr {
+            background-color: #4CAF50;
+            color: white;
+            animation: bounceIn 1s ease;
+        }
+
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #e0f7fa;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Button Styles */
+        .action-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .confirm-btn {
+            background-color: #4CAF50;
+        }
+
+        .confirm-btn:hover {
+            background-color: #388E3C;
+            transform: scale(1.05);
+        }
+
+        .interested-btn {
+            background-color: #0288D1;
+        }
+
+        .interested-btn:hover {
+            background-color: #0277BD;
+            transform: scale(1.05);
+        }
+
+        .back-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: rgb(0, 128, 64);
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background-color: rgb(0, 128, 64);
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .styled-table th, .styled-table td {
+                padding: 8px 10px;
+            }
+
+            .action-btn, .back-btn {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+            }
+        }
+
+        .text-center {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Pending Applications</h1>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Course</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="applyForm : ${applyForms}">
+                    <td th:text="${applyForm.fullName}"></td>
+                    <td th:text="${applyForm.emailId}"></td>
+                    <td th:text="${applyForm.mobileNo}"></td>
+                    <td th:text="${applyForm.course}"></td>
+                    <td>
+                        <form th:action="@{/confirm/{id}(id=${applyForm.id})}" method="post">
+                            <button class="action-btn confirm-btn" type="submit">Confirm</button>
+                        </form>
+                        <form th:action="@{/interested/{id}(id=${applyForm.id})}" method="post">
+                            <button class="action-btn interested-btn" type="submit">Interested</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <button class="back-btn" onclick="window.location.href='/applyForms'">Back</button>
+        </div>
+    </div>
+</body>
+</html>

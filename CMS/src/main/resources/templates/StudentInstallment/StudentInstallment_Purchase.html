@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Installation Purchase</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>Purchase Installation</h1>
+    
+    <!-- Display Installation Details -->
+    <div class="card mb-4">
+        <div class="card-header">
+            Installation Details
+        </div>
+        <div class="card-body">
+            <h5 class="card-title" th:text="${installation.installationName}">Installation Name</h5>
+            <p class="card-text"><strong>Description:</strong> <span th:text="${installation.installationDesc}">Installation Description</span></p>
+            <p class="card-text"><strong>Fees:</strong> <span th:text="${installation.installationFees}">Installation Fees</span> INR</p>
+            <p class="card-text"><strong>Start Date:</strong> <span th:text="${installation.installationStartDate}">Installation Start Date</span></p>
+            <p class="card-text"><strong>End Date:</strong> <span th:text="${installation.installationEndDate}">Installation End Date</span></p>
+        </div>
+    </div>
+
+    <!-- Purchase Form -->
+    <form id="paymentForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="qualification">Qualification</label>
+            <input type="text" class="form-control" id="qualification" name="qualification" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="mobile">Mobile</label>
+            <input type="text" class="form-control" id="mobile" name="mobile" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Proceed to Payment</button>   
+        <a href="/StudentInstallation" class="btn btn-secondary">Back</a>
+    </form>
+</div>
+
+<script>
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var options = {
+            "key": "rzp_test_HCTUbGUU3bXXQ6", // Your Razorpay Key ID
+            "amount": 50000, // Amount in paise (e.g., 50000 paise = 500 INR)
+            "currency": "INR",
+            "name": "E-Deesha Technologies ",
+            "description": "Purchase Description",
+            "image": "https://example.com/your-logo.png", // Your logo URL
+            "order_id": "YOUR_ORDER_ID", // Order ID from Razorpay
+            "handler": function (response) {
+                // Handle payment response
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "/StudentInstallment/payment/success", true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send("razorpayPaymentId=" + response.razorpay_payment_id + "&razorpayOrderId=" + response.razorpay_order_id + "&razorpaySignature=" + response.razorpay_signature);
+            },
+            "prefill": {
+                "name": document.getElementById('name').value,
+                "email": document.getElementById('email').value,
+                "contact": document.getElementById('mobile').value
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+
+        var rzp = new Razorpay(options);
+        rzp.open();
+    });
+</script>
+</body>
+</html>

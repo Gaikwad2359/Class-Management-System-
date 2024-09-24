@@ -1,0 +1,48 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.item {
+    flex: 1 1 auto;
+    margin: 10px;
+}
+
+/* For mobile devices */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .sidebar {
+        width: 100%;
+    }
+}
+
+/* For tablets */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .navbar {
+        padding: 20px;
+    }
+    .sidebar {
+        width: 200px;
+    }
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+button {
+    padding: 1em 2em;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    touch-action: manipulation;
+}

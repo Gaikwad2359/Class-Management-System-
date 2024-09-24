@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Application Form</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a1b9a, #c2185b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Heading */
+        h2 {
+            text-align: center;
+            color: #6a1b9a;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Label and Input Styles */
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        label {
+            color: #6a1b9a;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            color: #333;
+            background: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #6a1b9a;
+            outline: none;
+        }
+
+        .text-danger {
+            font-size: 0.85rem;
+            color: #d32f2f;
+            margin-top: 5px;
+        }
+
+        /* Button Styles */
+        button {
+            background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #5e35b1, #9c27b0);
+            transform: translateY(-2px);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .back-button {
+            background-color: #6a1b9a;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #8e24aa;
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Laptop Application Form</h2>
+
+        <form th:action="@{/user/laptopApplyForm}" th:object="${applyForm}" method="post">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" class="form-control" th:field="*{fullName}" placeholder="Enter full name"
+                       pattern="[A-Za-z\s]+" title="Full name can only contain letters and spaces">
+                <p class="text-danger" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Full name error</p>
+            </div>
+
+            <div class="form-group">
+                <label for="emailId">Email</label>
+                <input type="email" id="emailId" class="form-control" th:field="*{emailId}" placeholder="Enter email">
+                <p class="text-danger" th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}">Email error</p>
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNo">Phone Number</label>
+                <input type="text" id="phoneNo" class="form-control" th:field="*{phoneNo}" placeholder="Enter phone number"
+                       pattern="\d{10}" title="Phone number must be 10 digits">
+                <p class="text-danger" th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}">Phone number error</p>
+            </div>
+
+            <div class="form-group">
+                <label for="laptopRam">Laptop RAM</label>
+                <input type="text" id="laptopRam" class="form-control" th:field="*{laptopRam}" placeholder="Enter RAM size (e.g., 8GB)">
+                <p class="text-danger" th:if="${#fields.hasErrors('laptopRam')}" th:errors="*{laptopRam}">Laptop RAM error</p>
+            </div>
+
+            <div class="form-group">
+                <label for="laptopRom">Laptop ROM</label>
+                <input type="text" id="laptopRom" class="form-control" th:field="*{laptopRom}" placeholder="Enter ROM size (e.g., 256GB)">
+                <p class="text-danger" th:if="${#fields.hasErrors('laptopRom')}" th:errors="*{laptopRom}">Laptop ROM error</p>
+            </div>
+
+            <div class="button-container">
+                <button type="submit">Submit Application</button>
+                <a th:href="@{/user/user-dashboard}" class="back-button">Back</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

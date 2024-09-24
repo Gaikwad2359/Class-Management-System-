@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+	 <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding-top: 50px; /* Adjust to the height of your navbar */
+        }
+        
+         .bold-dark-text {
+            font-weight: bold;
+            color: #343a40; /* Dark color */
+        }
+        body {
+    margin: 0;
+    padding: 0;
+}
+.container {
+    padding-top: 2cm; /* Creates a 2 cm space from the top of the page */
+}
+.container h1 {
+            font-weight: bold; /* Ensures the heading is bold */
+            margin: 0;
+            font-size: 24px; /* Adjust font size if needed */
+        }
+        .styled-heading {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #343a40;
+}
+.styled-heading::before,
+.styled-heading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 2px; /* Thickness of the line */
+    background-color: #343a40; /* Dark color */
+}
+.styled-heading::before {
+    left: 0;
+}
+.styled-heading::after {
+    right: 0;
+}
+ #sidebar {
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        #sidebar .sidebar-header {
+            padding: 20px;
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+        }
+        #sidebar .sidebar-header img {
+            width: 180px;
+            height: 70px;
+       }
+        #sidebar .nav {
+            padding-top: 20px;
+        }
+        #sidebar .nav-item {
+            margin-bottom: 10px;
+        }
+        #sidebar .nav-item a {
+            padding: 15px 20px;
+            color: #343a40;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        #sidebar .nav-item a:hover {
+            background-color: #e9ecef;
+            color: #343a40;
+        }
+        #sidebar .nav-item a i {
+            margin-right: 10px;
+        }
+        .navbar {
+            background-color: #343a40;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            left: 250px;
+            width: calc(100% - 250px);
+            z-index: 1000;
+        }
+        .navbar-nav {
+            margin-left: auto;
+        }
+        .navbar-nav .nav-item {
+            margin-right: 20px;
+        }
+        .navbar-nav .nav-link {
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .navbar-nav .nav-link:hover {
+            text-decoration: underline;
+        }
+        .navbar-nav .nav-link.active {
+            text-decoration: underline;
+        }
+        main {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        .dashboard-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: white;
+            color: black;
+        }
+        .dashboard-card h2 {
+            margin-bottom: 10px;
+        }
+        .dashboard-card p {
+            margin-bottom: 0;
+            font-size: 1.2em;
+        }
+        .gradient-card {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+        }
+        .gradient-card h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .gradient-card p {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .gradient-card button {
+            background-color: white;
+            color: #1e3c72;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .gradient-card button:hover {
+            background-color: #ddd;
+        }
+        .image-text-container {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 2cm;
+        }
+        .image-box {
+            max-width: 45%;
+            height: auto;
+            border: 2px solid #343a40;
+            border-radius: 8px;
+            padding: 10px;
+            margin-right: 20px;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+        .image-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .text-box {
+            flex: 1;
+            border: 2px solid #343a40;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .text-box h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        .text-box p {
+            font-size: 1em;
+            line-height: 1.6;
+        }
+        .services-container {
+            margin-top: 2cm; /* 2cm gap between the sections */
+            text-align: center;
+        }
+        .services-container h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        .services-container p {
+            font-size: 1em;
+            line-height: 1.6;
+            max-width: 80%;
+            margin: 0 auto; /* Center the text */
+        }
+        @media (max-width: 768px) {
+            #sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .navbar {
+                left: 0;
+                width: 100%;
+            }
+            main {
+                margin-left: 0;
+                padding-top: 20px;
+            }
+            .image-text-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .image-box, .text-box {
+                max-width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            .services-container {
+                margin-top: 2cm; /* Maintain the gap on mobile as well */
+            }
+        }
+       /* Faint Silver Box Styling */
+    .faint-silver-box {
+        background-color: #dcdcdc; /* Faint silver color */
+        padding: 20px;
+        border-radius: 30px;
+        width: 100%;
+        max-width: 1000px; /* Adjust as needed */
+        display: flex;
+        align-items: center; /* Vertically center content */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px auto; /* Center the box */
+    }
+    /* Image Styling */
+    .faint-silver-image {
+        max-width: 300px; /* Limit the width of the image */
+        height: auto;
+        border-radius: 10px;
+        margin-right: 40px; /* Space between image and text */
+    }
+    /* Text Content Styling */
+    .box-content {
+        flex: 1; /* Take up remaining space in the box */
+        font-size: 16px;
+        color: #343a40; /* Dark gray text color */
+        line-height: 1.6;
+    }
+    /* Heading Styling */
+    .box-heading {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #2c3e50; /* Darker heading color */
+    }    
+     /* Dark Blue Box Styling */
+    .dark-blue-box {
+        background-color: #2c3e50; /* Dark blue color */
+        padding: 20px;
+        border-radius: 15px;
+        color: #ffffff; /* White text color */
+        font-weight: bold; /* Make text bold */
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 800px; /* Set a maximum width */
+        margin: 20px auto; /* Center the box */
+    }
+    /* Heading Styling */
+    .box-heading {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #ffffff; /* White heading color */
+        text-align: center;
+    }
+    /* Styling for the big box under "OUR SERVICES" */
+    .big-box {
+        background-color: #f5f5f5; /* Light gray color */
+        padding: 30px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+     /* Dark Blue Box Styling */
+    .dark-blue-box {
+        background-color: #2c3e50; /* Dark blue color */
+        padding: 20px;
+        border-radius: 15px;
+        color: #ffffff; /* White text color */
+        font-weight: bold; /* Make text bold */
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    /* Styling for the row of service items */
+    .row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+    /* Styling for each image inside the big box */
+    .service-item {
+        width: calc(33.33% - 40px); /* Width for 3 items in a row */
+        max-width: 250px;
+        margin: 30px;
+        text-align: center;
+    }
+    /* Styling for the second row items */
+    .row:nth-child(2) .service-item {
+        width: calc(60% - 40px); /* Width for 2 items in a row */
+    }
+    .service-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+    .service-label {
+        margin-top: 10px;
+        font-weight: bold;
+        color: #343a40;
+    }
+     /* Dark Blue Box Styling */
+    .dark-blue-box {
+        background-color: #2c3e50; /* Dark blue color */
+        padding: 20px;
+        border-radius: 15px;
+        color: #ffffff; /* White text color */
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 800px; /* Set a maximum width */
+        margin: 20px auto; /* Center the box */
+        position: relative; /* For positioning the button */
+    }
+    /* Heading Styling */
+    .box-heading {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #ffffff; /* White heading color */
+        text-align: center;
+    }
+    /* Button Container */
+    .button-container {
+        text-align: right; /* Align button to the right */
+    }
+    /* Button Styling */
+    .view-more-button {
+        display: inline-block; /* Inline block to allow text alignment */
+        padding: 8px 16px; /* Smaller padding for a more compact button */
+        background-color: #ffd700; /* Gold color */
+        color: #2c3e50; /* Dark blue text color */
+        border: none;
+        border-radius: 4px; /* Slightly smaller border radius */
+        font-size: 14px; /* Smaller font size */
+        font-weight: bold;
+        text-decoration: none; /* Remove underline from link */
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    }
+    .view-more-button:hover {
+        background-color: #e5b24d; /* Slightly darker gold on hover */
+    }
+    /* Button Styling */
+    .btn {
+        padding: 10px 20px; /* Padding inside the button */
+        border: none;
+        border-radius: 5px; /* Rounded corners */
+        font-size: 16px; /* Font size */
+        font-weight: bold;
+        color: #ffffff; /* White text color */
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Smooth transition */
+        text-decoration: none; /* Remove underline from link */
+        display: inline-block;
+    }
+    .btn-dark-gold {
+        background-color: #b8860b; /* Dark gold color */
+    }
+    .btn-dark-gold:hover {
+        background-color: #8b6d1b; /* Slightly darker gold on hover */
+    }
+    /* Center alignment and margin top */
+    .text-center {
+        text-align: center;
+    }
+    .mt-4 {
+        margin-top: 16px; /* Margin top for spacing */
+    }
+      /* Section Title Styling */
+    .section-title {
+        font-size: 36px;
+        font-weight: bold;
+        color: #2c3e50; /* Dark blue color */
+        text-align: center;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+    /* Info Box Styling */
+    .info-box {
+        background-color: #f9f9f9; /* Light gray color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px; /* Set a maximum width */
+        margin: 20px auto; /* Center the box */
+        display: flex;
+        justify-content: space-around; /* Space out the items evenly */
+    }
+    /* Info Item Styling */
+    .info-item {
+        text-align: center;
+        flex: 1; /* Flex grow to ensure equal space distribution */
+        padding: 10px;
+    }
+    .info-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2c3e50; /* Dark blue color */
+        margin-bottom: 10px;
+    }
+    .info-count {
+        font-size: 24px;
+        font-weight: bold;
+        color: #34495e; /* Darker gray color */
+    }
+    /* Info Box Styling */
+    .info-box {
+        background-color: #f9f9f9; /* Light gray color */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 1000px; /* Set a maximum width */
+        margin: 20px auto; /* Center the box */
+    }
+    .box-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2c3e50; /* Dark blue color */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    /* Info Content Styling */
+    .info-content {
+        display: flex;
+        justify-content: space-around; /* Space out the items evenly */
+    }
+    /* Info Item Styling */
+    .info-item {
+        text-align: center;
+        flex: 1; /* Flex grow to ensure equal space distribution */
+        padding: 10px;
+    }
+    .info-logo {
+        width: 50px; /* Adjust logo size */
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .info-count {
+        font-size: 24px;
+        font-weight: bold;
+        color: #34495e; /* Darker gray color */
+        margin: 10px 0;
+    }
+    .info-title {
+        font-size: 16px;
+        color: #2c3e50; /* Dark blue color */
+        font-weight: bold;
+    }
+/* Main Section Styling */
+.zplus-section {
+    text-align: center; /* Center-align content */
+    padding: 40px; /* Add padding around the section */
+    background-color: #f5f5f5; /* Light background color */
+    min-height: 100vh; /* Ensure the section takes full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+}
+/* General Styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Background color */
+}
+/* Main Section Styling */
+.zplus-section {
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+}
+/* Line Styling */
+.line {
+    border-top: 2px solid #ccc; /* Line color */
+    margin: 20px 0;
+}
+/* Info Box Styling */
+.info-box {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+/* Info Content Styling */
+.info-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+/* Info Item Styling */
+.info-item {
+    text-align: center;
+}
+.info-count {
+    font-size: 24px;
+    font-weight: bold;
+}
+.info-title {
+    font-size: 16px;
+}
+/* Contact Section Styling */
+.contact-section {
+    margin-top: 20px;
+}
+.contact-message {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+/* Contact Button Styling */
+.contact-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue color */
+    color: #fff; /* White text color */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.contact-button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+/* General Styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Background color */
+}
+/* Main Section Styling */
+.zplus-section {
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+}
+/* Line Styling */
+.line {
+    border-top: 2px solid #ccc; /* Line color */
+    margin: 20px 0;
+}
+/* Info Box Styling */
+.info-box {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+/* Info Content Styling */
+.info-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+/* Info Item Styling */
+.info-item {
+    text-align: center;
+}
+.info-count {
+    font-size: 24px;
+    font-weight: bold;
+}
+.info-title {
+    font-size: 16px;
+}
+/* Contact Section Styling */
+.contact-section {
+    margin-top: 20px;
+}
+.contact-message {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+/* Contact Button Styling */
+.contact-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff; /* Blue color */
+    color: #fff; /* White text color */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+.contact-button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+/* Links Section Styling */
+.links-section {
+    margin-top: 40px;
+    text-align: center;
+}
+.links-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.links-list {
+    list-style-type: none;
+    padding: 0;
+}
+.links-list li {
+    margin: 10px 0;
+}
+.links-list a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 18px;
+}
+.links-list a:hover {
+    text-decoration: underline;
+}
+/* About Section Styling */
+.about-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.about-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.about-section p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+/* Contact Information Section */
+.contact-info-section {
+    background-color: #001f3f; /* Navy blue color */
+    color: #ffffff; /* White text color */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+.contact-info-item {
+    flex: 1;
+    margin: 0 10px;
+}
+.contact-info-item i {
+    display: block;
+    margin-bottom: 10px;
+    color: #ffd700; /* Gold color for icons */
+}
+.contact-info-content h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.contact-info-content p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+/* Contact Information Section */
+.contact-info-section {
+    background-color: #001f3f; /* Navy blue color */
+    color: #ffffff; /* White text color */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+/* Contact Info Item */
+.contact-info-item {
+    flex: 1;
+    margin: 0 10px;
+}
+/* Icon Styling */
+.contact-icon {
+    color: #ffd700; /* Golden color for icons */
+    margin-bottom: 10px;
+}
+/* Contact Info Content */
+.contact-info-content {
+    font-size: 16px;
+}
+.contact-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+/* Contact Location Heading */
+.contact-location-heading {
+    color: #000000; /* Black color */
+    font-weight: bold; /* Bold text */
+}
+/* Text Styling */
+.contact-info-content p {
+    margin: 5px 0;
+}
+/* Link Styling */
+.contact-link {
+    color: #ffffff; /* White text color for links */
+    text-decoration: none; /* Remove underline from links */
+}
+.contact-link:hover {
+    text-decoration: underline; /* Underline links on hover */
+}
+.contact-location-heading {
+    color: white; /* Makes the bold text white */
+}
+.contact-icon {
+    color: #ff5722; /* Change the color of the location map symbol */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds a shadow effect */
+    transform: rotate(10deg); /* Slightly rotates the icon */
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.contact-info-section {
+    background-color: #001f3f; /* Darker navy blue color */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.contact-info-item {
+    flex: 1;
+    margin: 0 10px;
+}
+.contact-icon {
+    font-size: 24px;
+    color: #ffffff;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.contact-info-content {
+    display: inline-block;
+}
+.contact-heading {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.contact-info-content p {
+    margin: 5px 0;
+}
+strong {
+    color: #ffcc00; /* Emphasizes bold text with a different color */
+}
+.contact-info-section::after {
+    content: "";
+    display: block;
+    clear: both;
+    border-top: 1px solid #ffffff;
+    margin-top: 20px;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+.footer-section {
+    background-color: #001f3f; /* Dark navy blue background color */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-top: 1px solid #ffffff; /* Line at the top */
+}
+.footer-column {
+    flex: 1;
+    margin: 0 10px;
+}
+.footer-heading {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ffcc00; /* Emphasizes the heading with a different color */
+}
+.footer-logo {
+    max-width: 200px; /* Adjust the size of the logo */
+    margin-top: 10px;
+}
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+.footer-links li {
+    margin: 5px 0;
+}
+.footer-links a {
+    color: white;
+    text-decoration: none;
+}
+.footer-links a:hover {
+    text-decoration: underline;
+}
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+.social-icons a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+.social-icons a:hover {
+    color: #ffcc00; /* Hover effect for social icons */
+}
+.footer-section::after {
+    content: "";
+    display: block;
+    clear: both;
+    margin-top: 20px;
+    border-top: 1px solid #ffffff; /* Line at the bottom */
+}
+.footer-column {
+    flex: 1;
+    margin: 0 10px;
+}
+.footer-heading {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ffcc00; /* Emphasizes the heading with a different color */
+}
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px; /* Space between social icons and mini images */
+}
+.social-icons a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+.social-icons a:hover {
+    color: #ffcc00; /* Hover effect for social icons */
+}
+.mini-images {
+    display: flex;
+    justify-content: flex-start; /* Align images to the left */
+    gap: 10px; /* Space between each image */
+}
+.mini-img {
+    max-width: 40px; /* Small size for the images */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Optional: rounded corners */
+}
+.footer-copyright {
+    background-color: black;
+    text-align: center;
+    height: 1.5cm; /* Set the height to 1.5 cm */
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: center; /* Vertically center the text */
+    justify-content: center; /* Horizontally center the text */
+    margin-top: 0; /* Remove any space above the footer */
+    padding: 0; /* Remove any padding */
+}
+
+.footer-copyright p {
+    margin: 0; /* Ensure no extra spacing around the text */  
+} 
+
+ .map-container {
+            margin-top: 30px;
+            margin-bottom: 60px;
+        }
+        .map-iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+        }
+</style>
+</head>
+<body>
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <img th:src="@{/images/ZplusLogo.png}" alt="Company Logo">
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/dashboard}">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+           
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/reports}">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Reports</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/notifications}">
+                    <i class="fas fa-bell"></i>
+                    <span>Notifications </span>
+                </a>
+            </li>
+            
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/DailyUpdates}">
+                    <i class="fas fa-calendar-day"></i>
+                    <span>Daily Updates </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/logout}">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" th:href="@{/home}">Home</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Services
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" th:href="@{/services/software-development}">Software Development</a>
+                    <a class="dropdown-item" th:href="@{/services/hardware-sales}">Hardware Sales</a>
+                    <a class="dropdown-item" th:href="@{/services/training-certifications}">Training and Certifications</a>
+                    <a class="dropdown-item" th:href="@{/services/student-augmentation}">Student Augmentation</a>
+                    <a class="dropdown-item" th:href="@{/services/project-guidance}">Project Guidance</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Courses
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					 <a class="dropdown-item" th:href="@{/courses/FullStackDevelopment}">Java Full Stack Development</a>
+					 <a class="dropdown-item" th:href="@{/courses/DataStructure}">Data Structure and Algorithms</a>
+					   <a class="dropdown-item" th:href="@{/courses/Angular}">Angular Development</a>
+                    <a class="dropdown-item" th:href="@{/courses/CProgramming}">C Programming </a>
+                    <a class="dropdown-item" th:href="@{/courses/coreJAVA}">Core Java</a>
+                    <a class="dropdown-item" th:href="@{/courses/AdvancedJava}">Advanced Java</a>
+                </div>
+            </li>
+            <a class="nav-item nav-link" th:href="@{/about}">About Us</a>
+            <a class="nav-item nav-link" th:href="@{/contact}">Contact Us</a>
+        </div>
+    </nav>
+    
+    
+    
+    <main>
+        <div class="container">
+            <h1>Top-Rated IT Courses in Pune Offering Full Stack Developer Training With Internship.</h1>
+            <div class="image-text-container">
+                <div class="image-box">
+                    <img src="images/500Zplus.png" alt="500Zplus Image" class="img-fluid">
+                </div>
+                <div class="text-box">
+                    <h2>Why Choose Us?</h2>
+                     <p class="bold-dark-text">
+        Zplus Cyber Secure Technologies is one of the best training institutes in Pune with placement services.
+        We have trained and placed thousands of students who aspired to make a career in IT. We not only provide
+        IT courses but aim to provide you with the right skill sets for the market where you can grow and become
+        more of yourself. Our IT Certification courses in Pune offer you extensive learning and development that can
+        guarantee you a high-paying job.
+    </p>
+                </div>     
+<div class="services-container">
+    <h2 class="styled-heading">OUR SERVICES</h2>
+    <p class="bold-dark-text">
+        At our classes, we pride ourselves on thinking big and offering a diverse range 
+        of services across all major software technology platforms.
+    </p>
+      <!-- Big box containing service images -->
+    <div class="big-box">
+        <div class="row">
+            <div class="service-item">
+                <img src="images/ProjectGiudence.png" alt="Project Guidance" class="service-image">
+                <div class="service-label">Project Guidance</div>
+            </div>
+            <div class="service-item">
+                <img src="images/SoftwareDevelopers.png" alt="Software Developers" class="service-image">
+                <div class="service-label">Software Developers</div>
+            </div>
+            <div class="service-item">
+                <img src="images/StudentAugumentation.png" alt="Student Augmentation" class="service-image">
+                <div class="service-label">Student Augmentation</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="service-item">
+                <img src="images/hardwareSale.png" alt="Hardware Sales" class="service-image">
+                <div class="service-label">Hardware Sales</div>
+            </div>
+            <div class="service-item">
+                <img src="images/Training.png" alt="Training" class="service-image">
+                <div class="service-label">Training and Cirtification </div>
+            </div>
+        </div>
+    </div>
+     <hr style="border: 1px solid #343a40; border-radius: 0.5px;">
+</div>
+	<div class="faint-silver-box">
+    <img src="images/SoftwareZplus.png" alt="SoftwareZplus Image" class="faint-silver-image">
+    <div class="box-content">
+		<div class="dark-blue-box">
+    <div class="box-heading">Software Development</div>
+    <p>
+        Software Development is the process of conceiving, specifying, designing, programming, documenting, testing, and bug fixing involved in creating and maintaining applications, frameworks, or other software components. 
+        Software Development involves writing and maintaining the source code, but in a broader sense, it includes all processes from the conception of the desired software through to the final manifestation of the software, typically in a planned and structured process.
+        Software Development also includes research, new Development, prototyping, modification, reuse, re-engineering, maintenance, or any other activities that result in software products.
+    </p>       
+    <div class="text-center mt-4">
+    <button type="button" class="btn btn-dark-gold btn-rounded" onclick="window.location.href='/services/software-development'">View More>>></button>
+	</div>
+		</div>	
+	</div>
+     </div>
+        </div>
+        <!-- Main Section for "Zplus Cyber Secure Technologies" -->
+<div class="zplus-section">
+    <h1 class="company-name">Zplus Cyber Secure Technologies Pvt Ltd</h1>
+    <div class="line"></div> <!-- Line above the info box -->
+    <!-- Info Box -->
+    <div class="info-box">
+        <div class="info-content">
+            <div class="info-item">
+                <i class="fa fa-building fa-3x stats-icon" aria-hidden="true"></i>
+                <p class="info-count">2</p>
+                <p class="info-title">Offices</p>
+            </div>
+            <div class="info-item">
+                <i class="fa fa-tasks fa-3x stats-icon" aria-hidden="true"></i>
+                <p class="info-count">800</p>
+                <p class="info-title">Projects</p>
+            </div>
+            <div class="info-item">
+                <i class="fa fa-graduation-cap fa-3x stats-icon" aria-hidden="true"></i>
+                <p class="info-count">25,000</p>
+                <p class="info-title">Students</p>
+            </div>
+        </div>
+    </div>
+    <div class="line"></div> <!-- Line below the info box -->
+    <!-- Contact Us Section -->
+    <div class="contact-section">
+        <p class="contact-message">Feel Free to Connect with us!</p>
+        <a href="contact" class="contact-button">Contact Us</a>
+    </div>
+</div>
+
+
+      <div class="map-container">
+            <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.279041231655!2d73.85499857416819!3d18.471015470688126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2eb3fdf9f5ddd%3A0x1737d60e3d545b09!2sZplus%20Cyber%20Secure%20Technologies%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1722712722185!5m2!1sen!2sin" 
+    width="1060" 
+    height="450" 
+    style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+        </div>
+
+
+   <!-- Contact Information Section -->
+<div class="contact-info-section">
+    <div class="contact-info-item">
+        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+        <div class="contact-info-content">
+            <h3 class="contact-heading">Find Us</h3>
+            <p><strong>Head Office:</strong> Rajdhani Complex, Office No. A/409, 4th Floor, Near Shankar Maharaj Math, Pune-Satara Road, Pune 411043</p>
+            <p><strong>Branch 2:</strong> 114 Pearl Plaza, opposite to Andheri Station, Next to Mcd, Andheri West, Mumbai Maharashtra 400058</p>
+        </div>
+    </div>
+    <div class="contact-info-item">
+        <i class="fas fa-phone-volume" aria-hidden="true"></i>
+        <div class="contact-info-content">
+            <h3 class="contact-heading">Call Us</h3>
+            <p>+91 6362803282</p>
+            <p>+91 9637630613</p>
+            <p>+91 9850083751</p>
+        </div>
+    </div>
+    <div class="contact-info-item">
+        <i class="fas fa-envelope" aria-hidden="true"></i>
+        <div class="contact-info-content">
+            <h3 class="contact-heading">Mail Us</h3>
+            <p> info@zpluscybertech.com</p>
+        </div>
+    </div>
+</div>
+<!-- Footer Section -->
+<div class="footer-section">
+    <div class="footer-column">
+        <img src="images/ZplusLogo.png" alt="Zplus Logo" class="footer-logo">
+    </div>
+    <div class="footer-column">
+        <h3 class="footer-heading">Useful Links</h3>
+        <ul class="footer-links">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="/services/software-development">Services </a></li>
+             <li><a href="/courses/FullStackDevelopment">Courses </a></li>
+        </ul>
+    </div>
+   <div class="footer-column">
+    <h3 class="footer-heading">Follow Us</h3>
+    <div class="social-icons">
+        <a href="https://www.instagram.com/zplus_cyber_tech/"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div class="mini-images">
+        <img src="images/IAFZplus.png" alt="IAF Zplus" class="mini-img">
+        <img src="images/IASZplus.png" alt="IAS Zplus" class="mini-img">
+        <img src="images/IsoZplus.png" alt="Iso Zplus" class="mini-img">
+        <img src="images/IsoZplus2.png" alt="Iso Zplus 2" class="mini-img">
+    </div>
+</div>
+</div>
+<!-- Other content of your footer -->
+<div class="footer-copyright">
+    <p>Copyright © 2024 <strong>Zplus Cyber Secure Technologies Pvt Ltd.</strong>  All Right Reserved</p>
+</div>
+</div>   
+</div>
+ </div>
+</div>     
+    </main>
+</body>
+</html>

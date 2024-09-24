@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background color */
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff; /* White container background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+        }
+
+        h1, .page-title {
+            color: #4b0082; /* Indigo color for heading */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Light text shadow */
+        }
+
+        .btn-success {
+            background-color: #32cd32; /* Lime green color for buttons */
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3); /* Green shadow effect */
+        }
+
+        .btn-primary {
+            background-color: #1e90ff; /* Dodger blue color for buttons */
+            border-color: #1e90ff;
+            box-shadow: 0px 0px 10px rgba(30, 144, 255, 0.3); /* Blue shadow effect */
+        }
+
+        .btn-rounded {
+            border-radius: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="page-title">Edit Student</h1>
+    <form th:action="@{/UpdateStudent/{id}(id=${student.studentId})}" th:object="${student}" method="POST">
+        <div class="form-group">
+            <label for="studentFirstName">First Name</label>
+            <input type="text" class="form-control" id="studentFirstName" name="studentFirstName" th:field="*{studentFirstName}">
+        </div>
+        <div class="form-group">
+            <label for="studentMiddleName">Middle Name</label>
+            <input type="text" class="form-control" id="studentMiddleName" name="studentMiddleName" th:field="*{studentMiddleName}">
+        </div>
+        <div class="form-group">
+            <label for="studentLastName">Last Name</label>
+            <input type="text" class="form-control" id="studentLastName" name="studentLastName" th:field="*{studentLastName}">
+        </div>
+        <div class="form-group">
+            <label for="studentMobileNo">Mobile No</label>
+            <input type="text" class="form-control" id="studentMobileNo" name="studentMobileNo" th:field="*{studentMobileNo}">
+        </div>
+        <div class="form-group">
+            <label for="studentEmailId">Email ID</label>
+            <input type="email" class="form-control" id="studentEmailId" name="studentEmailId" th:field="*{studentEmailId}">
+        </div>
+        <div class="form-group">
+            <label for="studentReference">Reference</label>
+            <input type="text" class="form-control" id="studentReference" name="studentReference" th:field="*{studentReference}">
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <input type="text" class="form-control" id="status" name="status" th:field="*{status}">
+        </div>
+        <div class="form-group">
+            <label for="studentBalance">Balance</label>
+            <input type="text" class="form-control" id="studentBalance" th:field="*{studentbalance}" placeholder="Enter balance">
+        </div>
+        
+        <!-- View mode only -->
+         <!-- Email (view-only) -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" readonly>
+        </div>
+
+        <!-- Role (view-only) -->
+        <div class="form-group">
+            <label for="role">Role</label>
+            <input type="text" class="form-control" id="role" th:field="*{role}" readonly>
+        </div>
+        
+       <!-- Password (view-only, not masked) -->
+<div class="form-group">
+    <label for="password">Password (Hashed)</label>
+    <input type="text" class="form-control" id="password" th:field="*{password}" readonly>
+</div>
+
+        
+         <div class="form-group">
+            <label for="name">Registration Name </label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" readonly>
+        </div>
+       
+       <div class="form-group">
+            <label for="enable">Enable </label>
+            <input type="text" class="form-control" id="enable" th:field="*{enable}" readonly>
+        </div>        
+        
+        <div class="form-group">
+            <label for="cityMaster">City</label>
+            <select class="form-control" id="cityMaster" name="cityMaster.cityId" th:field="*{cityMaster.cityId}">
+                <option value="" disabled selected>Select a City</option>
+                <option th:each="city : ${cities}" th:value="${city.cityId}" th:text="${city.cityName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="stateMaster">State</label>
+            <select class="form-control" id="stateMaster" name="stateMaster.stateId" th:field="*{stateMaster.stateId}">
+                <option value="" disabled selected>Select a State</option>
+                <option th:each="state : ${states}" th:value="${state.stateId}" th:text="${state.stateName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="countryMaster">Country</label>
+            <select class="form-control" id="countryMaster" name="countryMaster.countryId" th:field="*{countryMaster.countryId}">
+                <option value="" disabled selected>Select a Country</option>
+                <option th:each="country : ${countries}" th:value="${country.countryId}" th:text="${country.countryName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="qualificationMaster">Qualification</label>
+            <select class="form-control" id="qualificationMaster" name="qualificationMaster.qualId" th:field="*{qualificationMaster.qualId}">
+                <option value="" disabled selected>Select a Qualification</option>
+                <option th:each="qualification : ${qualifications}" th:value="${qualification.qualId}" th:text="${qualification.qualName}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success btn-rounded">Update</button>
+        <button type="button" class="btn btn-primary btn-rounded" onclick="window.location.href='/Students'">Back</button>
+    </form>
+</div>
+
+</body>
+</html>

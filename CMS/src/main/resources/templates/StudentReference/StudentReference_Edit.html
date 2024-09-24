@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student Reference</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f8ff;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+        h2, .page-title {
+            color: #4b0082;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .btn-success {
+            background-color: #32cd32;
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3);
+        }
+        .btn-primary {
+            background-color: #1e90ff;
+            border-color: #1e90ff;
+            box-shadow: 0px 0px 10px rgba(30, 144, 255, 0.3);
+        }
+        .btn-rounded {
+            border-radius: 20px;
+        }
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="page-title">Edit Student Reference</h2>
+    <form th:action="@{/UpdateStudentReference/{id}(id=${studentReference.referenceId})}" th:object="${studentReference}" method="post">
+        <input type="hidden" th:field="*{referenceId}">
+        <div class="form-group">
+            <label for="referenceStudentName">Reference Student Name:</label>
+            <input type="text" class="form-control" id="referenceStudentName" th:field="*{referenceStudentName}" required>
+        </div>
+        <div class="form-group">
+            <label for="student">Student:</label>
+            <select class="form-control" id="student" th:field="*{studentMaster.studentId}">
+                <option th:each="student : ${listStudents}" 
+                        th:value="${student.studentId}" 
+                        th:text="${student.studentFirstName + ' ' + student.studentLastName}">
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-rounded">Update</button>
+        <button type="button" class="btn btn-primary btn-rounded" onclick="window.location.href='/StudentReferences'">Back</button>
+    </form>
+</div>
+</body>
+</html>

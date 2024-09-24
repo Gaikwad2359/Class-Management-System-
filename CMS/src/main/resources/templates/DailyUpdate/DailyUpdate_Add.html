@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Daily Update</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background color */
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff; /* White container background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+        }
+
+        h1, .page-title {
+            color: #4b0082; /* Indigo color for heading */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Light text shadow */
+        }
+
+        .btn-success {
+            background-color: #32cd32; /* Lime green color for buttons */
+            border-color: #32cd32;
+            box-shadow: 0px 0px 10px rgba(50, 205, 50, 0.3); /* Green shadow effect */
+        }
+
+        .btn-primary {
+            background-color: #1e90ff; /* Dodger blue color for buttons */
+            border-color: #1e90ff;
+            box-shadow: 0px 0px 10px rgba(30, 144, 255, 0.3); /* Blue shadow effect */
+        }
+
+        .btn-rounded {
+            border-radius: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="page-title">Add Daily Update</h1>
+    <form th:action="@{/AddDailyUpdate}" th:object="${dailyUpdate}" method="post">
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea class="form-control" id="message" th:field="*{message}" placeholder="Enter update message"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="updateDate">Date</label>
+            <input type="date" class="form-control" id="updateDate" th:field="*{updateDate}">
+        </div>
+        
+        <div class="form-group">
+            <label for="batch">Batch</label>
+            <select id="batch" th:field="*{batchMaster.batchId}" class="form-control">
+                <option th:each="batch : ${listBatches}" th:value="${batch.batchId}" th:text="${batch.batchName}">Course</option>
+            </select>
+        </div>
+        
+        
+        <button type="submit" class="btn btn-success btn-rounded">Add Update</button>
+        <button type="button" class="btn btn-primary btn-rounded" onclick="window.location.href='/DailyUpdates'">Back</button>
+    </form>
+</div>
+</body>
+</html>

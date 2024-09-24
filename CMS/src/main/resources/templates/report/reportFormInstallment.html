@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Select Start Date for Student Installment Report</title>
+</head>
+<body>
+    <h1>Select Start Date for Student Installment Report</h1>
+    <form th:action="@{/report/studentInstallment}" method="get">
+        <label for="startDate">Start Date (yyyy-MM-dd):</label>
+        <input type="text" id="startDate" name="startDate" />
+        <button type="submit">Generate Report</button>
+    </form>
+</body>
+</html>

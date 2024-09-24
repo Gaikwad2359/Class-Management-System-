@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View State</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background color */
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff; /* White container background */
+            padding: 20px;
+            border: 1px solid #ced4da; /* Gray border */
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            color: #4b0082; /* Indigo color for heading */
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Light text shadow */
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .table th {
+            background-color: #f0f8ff; /* Light blue background color */
+            color: #4b0082; /* Indigo color for text */
+        }
+
+        .btn-primary {
+            background-color: #1e90ff; /* Dodger blue color for buttons */
+            border-color: #1e90ff;
+            box-shadow: 0px 0px 10px rgba(30, 144, 255, 0.3); /* Blue shadow effect */
+        }
+
+        .btn-rounded {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>State Details</h2>
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <th scope="row">State ID</th>
+            <td th:text="${state.stateId}"></td>
+        </tr>
+        <tr>
+            <th scope="row">State Name</th>
+            <td th:text="${state.stateName}"></td>
+        </tr>
+        <tr>
+            <th scope="row">State Description</th>
+            <td th:text="${state.stateDescription}"></td>
+        </tr>
+        <tr>
+            <th scope="row">Country</th>
+            <td th:text="${state.countryMaster != null ? state.countryMaster.countryName : 'N/A'}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a href="/States" class="btn btn-primary btn-rounded">Back</a>
+    </div>
+</div>
+</body>
+</html>

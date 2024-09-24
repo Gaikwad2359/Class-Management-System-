@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Apply Form</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a1b9a, #c2185b);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for form */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Heading */
+        h2 {
+            text-align: center;
+            color: #6a1b9a;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        div {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        /* Label styles */
+        label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #6a1b9a;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        /* Input styles */
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            color: #333;
+            transition: border-color 0.3s;
+            background: #f9f9f9;
+            outline: none;
+        }
+
+        input:focus, 
+        select:focus {
+            border-color: #6a1b9a;
+        }
+
+        /* Floating label effect */
+        input:focus + label,
+        input:not(:placeholder-shown) + label,
+        select:focus + label,
+        select:not([value=""]) + label {
+            top: -16px;
+            left: 8px;
+            background: #fff;
+            padding: 0 5px;
+            font-size: 0.75rem;
+            color: #6a1b9a;
+        }
+
+        /* Error Messages */
+        div[th\:errors] {
+            color: red;
+            font-size: 0.875em;
+        }
+
+        /* Button Styles */
+        button {
+            background: linear-gradient(135deg, #6a1b9a, #8e24aa);
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #5e35b1, #9c27b0);
+            transform: translateY(-2px);
+        }
+
+        /* Button Container Styles */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Back Button Styles */
+        .back-button {
+            background-color: #6a1b9a;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #8e24aa;
+        }
+
+        /* Input Error Message */
+        div[th\:errors] {
+            color: #d32f2f;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Apply for Course</h2>
+
+    <form th:action="@{/guest/ApplyStudentCourse}" th:object="${applyForm}" method="post">
+        <div>
+            <input type="text" id="fullName" placeholder=" " th:field="*{fullName}" />
+            <label for="fullName">Full Name:</label>
+            <div th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
+        </div>
+
+        <div>
+            <input type="email" id="emailId" placeholder=" " th:field="*{emailId}" />
+            <label for="emailId">Email ID:</label>
+            <div th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></div>
+        </div>
+
+        <div>
+            <input type="password" id="emailPass" placeholder=" " th:field="*{emailPass}" />
+            <label for="emailPass">Password:</label>
+            <div th:if="${#fields.hasErrors('emailPass')}" th:errors="*{emailPass}"></div>
+        </div>
+
+        <div>
+            <input type="text" id="mobileNo" placeholder=" " th:field="*{mobileNo}" />
+            <label for="mobileNo">Mobile No:</label>
+            <div th:if="${#fields.hasErrors('mobileNo')}" th:errors="*{mobileNo}"></div>
+        </div>
+
+        <div>
+            <select id="course" th:field="*{course}">
+                <option value="" disabled selected>Select a course</option>
+                <option th:each="course : ${courses}" th:value="${course}" th:text="${course}"></option>
+            </select>
+            <label for="course">Course:</label>
+            <div th:if="${#fields.hasErrors('course')}" th:errors="*{course}"></div>
+        </div>
+
+        <div class="button-container">
+            <button type="submit">Apply</button>
+           <a th:href="@{/homePage}" class="button-container">Back</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
