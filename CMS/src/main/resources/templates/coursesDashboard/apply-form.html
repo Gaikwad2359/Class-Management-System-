@@ -165,7 +165,7 @@
 <div class="container">
     <h2>Apply for Course</h2>
 
-    <form th:action="@{/apply}" th:object="${applyForm}" method="post">
+    <form th:action="@{/applyCourse}" th:object="${applyForm}" method="post">
         <div>
             <input type="text" id="fullName" placeholder=" " th:field="*{fullName}" />
             <label for="fullName">Full Name:</label>

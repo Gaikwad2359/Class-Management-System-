@@ -40,7 +40,7 @@ public class SecurityConfig {
             .authorizeHttpRequests()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/user/**").hasRole("USER")
-                .requestMatchers("/", "/register", "/signin", "/saveUser", "/saveAdmin", "/verify", "/homePage").permitAll()  // Allow /homePage without authentication
+                .requestMatchers("/", "/register","/saveAdmin", "/saveUser",  "/signin", "/verify", "/homePage").permitAll()  // Allow /homePage without authentication
                 .requestMatchers("/guest/**").permitAll()  // Allow all guest pages to be accessed without authentication
                 .requestMatchers("/images/**", "/css/**", "/js/**" ,"/pdf/**").permitAll()  // Allow static resources
                 .anyRequest().authenticated()  // All other URLs require authentication

@@ -90,7 +90,7 @@ public class AdminController {
             session.setAttribute("msg", "Something went wrong on the server");
         }
 
-        return "redirect:/register";
+        return "redirect:/Register/register";
     }
 
     @PostMapping("/saveAdmin")
@@ -105,7 +105,7 @@ public class AdminController {
             session.setAttribute("msg", "Something went wrong on the server");
         }
 
-        return "redirect:/register";
+        return "redirect:/Register/registerAdmin";
     }
     
     @GetMapping("/verify")

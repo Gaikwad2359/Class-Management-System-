@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
 <head>
     <meta charset="ISO-8859-1">
     <title>Registration Page</title>
-    <!-- Include Bootstrap CSS for styling -->
+     Include Bootstrap CSS for styling 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    
     <section>
         <div class="container p-3">
             <div class="row">
@@ -21,13 +22,9 @@
                         </th:block>
 
                     <div class="card-body"> 
-                      <!-- Back Button -->
-                      <div class="mb-3">
-                          <a href="javascript:history.back()" class="btn btn-secondary col-md-12">Back</a>
-                      </div>
                       
-                      <!-- User Registration Form -->    
-                            <form action="/admin/saveUser" method="post">
+                       User Registration Form      
+                            <form action="/saveUser" method="post">
                                 <h5>User Registration</h5>
                                 <div class="mb-3">
                                     <label for="name">Enter Full Name</label>
@@ -50,15 +47,40 @@
 
                             <hr>
 
+
+				 Admin Registration Form       
+                  	   <form action="/saveAdmin" method="post">
+                                <h5>Admin Registration</h5>
+                                <div class="mb-3">
+                                    <label for="adminName">Enter Full Name</label>
+                                    <input type="text" id="adminName" name="name" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="adminEmail">Enter Email</label>
+                                    <input type="email" id="adminEmail" name="email" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="adminMobileNo">Enter Mobile Number</label>
+                                    <input type="text" id="adminMobileNo" name="mobileNo" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="adminPassword">Enter Password</label>
+                                    <input type="password" id="adminPassword" name="password" class="form-control" required>
+                                </div>
+                                <button class="btn btn-danger col-md-12">Register as Admin</button>
+                            </form>
+
+                            <hr>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>	
+        </div>
     </section>
-    <!-- Include Bootstrap JS for any potential JavaScript needs -->
+     Include Bootstrap JS for any potential JavaScript needs 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
-</html>
+</html>-->

@@ -12,40 +12,41 @@
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <div class="card">
-                        
                         <div class="card-header text-center fs-4">Register Page</div>
 
                         <th:block th:if="${session.msg}">
                             <p class="text-center text-success fs-4" th:text="${session.msg}"></p>
                             <th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
                         </th:block>
-
-                    <div class="card-body"> 
+			
+                    <div class="card-body">
+						 <div class="card-body"> 
                       <!-- Back Button -->
                       <div class="mb-3">
                           <a href="javascript:history.back()" class="btn btn-secondary col-md-12">Back</a>
                       </div>
+                       
                       
-                      <!-- User Registration Form -->    
-                            <form action="/admin/saveUser" method="post">
-                                <h5>User Registration</h5>
+                          <!--  Admin Registration Form -->
+                  	   <form action="/saveAdmin" method="post">
+                                <h5>Admin Registration</h5>
                                 <div class="mb-3">
-                                    <label for="name">Enter Full Name</label>
-                                    <input type="text" id="name" name="name" class="form-control" required>
+                                    <label for="adminName">Enter Full Name</label>
+                                    <input type="text" id="adminName" name="name" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="email">Enter Email</label>
-                                    <input type="email" id="email" name="email" class="form-control" required>
+                                    <label for="adminEmail">Enter Email</label>
+                                    <input type="email" id="adminEmail" name="email" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="mobileNo">Enter Mobile Number</label>
-                                    <input type="text" id="mobileNo" name="mobileNo" class="form-control" required>
+                                    <label for="adminMobileNo">Enter Mobile Number</label>
+                                    <input type="text" id="adminMobileNo" name="mobileNo" class="form-control" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="password">Enter Password</label>
-                                    <input type="password" id="password" name="password" class="form-control" required>
+                                    <label for="adminPassword">Enter Password</label>
+                                    <input type="password" id="adminPassword" name="password" class="form-control" required>
                                 </div>
-                                <button class="btn btn-primary col-md-12">Register as User  </button>
+                                <button class="btn btn-danger col-md-12">Register as Admin</button>
                             </form>
 
                             <hr>
@@ -54,7 +55,7 @@
                     </div>
                 </div>
             </div>
-        </div>	
+        </div>
     </section>
     <!-- Include Bootstrap JS for any potential JavaScript needs -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

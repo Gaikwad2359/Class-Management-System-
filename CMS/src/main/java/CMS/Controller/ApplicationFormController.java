@@ -2,6 +2,8 @@ package CMS.Controller;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,14 +20,16 @@ import jakarta.validation.Valid;
 @Controller
 public class ApplicationFormController {
 
-	@Autowired
+	private static final Logger logger = LoggerFactory.getLogger(ApplicationFormController.class);
+
+    @Autowired
     private ApplicationFormService applyFormService;
 
     @GetMapping("/apply")
     public String showApplyForm(Model model) {
+        logger.info("Loading apply form page.");
         model.addAttribute("applyForm", new ApplyForm());
 
-        // Add the predefined course list to the model
         List<String> courses = Arrays.asList(
                 "Full Stack Development", 
                 "DSA", 
@@ -36,13 +40,13 @@ public class ApplicationFormController {
         );
         model.addAttribute("courses", courses);
 
-        return "coursesDashboard/apply-form";  // Use the correct path to your form view
+        return "coursesDashboard/apply-form";  // Path to the form view
     }
 
-    @PostMapping("/apply")
+    @PostMapping("/applyCourse")
     public String submitApplyForm(@Valid @ModelAttribute("applyForm") ApplyForm applyForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            // Add the course list back to the model if there are validation errors
+            logger.error("Validation errors found while submitting apply form.");
             List<String> courses = Arrays.asList(
                     "Full Stack Development", 
                     "DSA", 
@@ -53,19 +57,22 @@ public class ApplicationFormController {
             );
             model.addAttribute("courses", courses);
 
-            // Stay on the same form page to show validation errors
-            return "coursesDashboard/apply-form";  // Make sure the path matches your Thymeleaf view
+            return "coursesDashboard/apply-form";  // Return to the form page if errors
         }
 
-        // Save the form and redirect to avoid re-submission on refresh
+        logger.info("Saving apply form for student: {}", applyForm.getFullName());
         applyFormService.saveApplyForm(applyForm);
-        return "redirect:/apply-success";  // Redirect to success page to prevent re-submission
+        return "redirect:/apply-success";  // Redirect to success page after submission
     }
 
     @GetMapping("/apply-success")
     public String showSuccessPage() {
+        logger.info("Displaying success page after form submission.");
         return "coursesDashboard/apply-success";  // Success page after submission
     }
+    
+    
+    
     
     @GetMapping("/applyForms")
     public String showApplyForms(Model model) {
