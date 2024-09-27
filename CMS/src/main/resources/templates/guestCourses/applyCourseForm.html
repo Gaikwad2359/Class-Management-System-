@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Course</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #ffffff; /* White background for the form */
+            padding: 40px 30px; /* Add padding around the container */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+            max-width: 600px; /* Max width for the container */
+            animation: fadeIn 0.5s ease forwards; /* Animation for fade-in effect */
+            opacity: 0; /* Start hidden for animation */
+            transform: translateY(-30px); /* Slide down effect */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px; /* Add margin for spacing */
+            text-align: center; /* Centered text */
+            font-size: 2rem; /* Adjust font size */
+        }
+
+        .form-control {
+            border-radius: 8px; /* Rounded corners for inputs */
+            transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for input focus */
+        }
+
+        .form-control:focus {
+            border-color: #007bff; /* Change border color on focus */
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Add a shadow effect */
+        }
+
+        .invalid-feedback {
+            display: block; /* Show error messages */
+            font-size: 0.875rem; /* Smaller font size for error */
+        }
+
+        .btn {
+            transition: background-color 0.3s, transform 0.3s; /* Button transition */
+            border-radius: 8px; /* Rounded corners for buttons */
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Primary button color */
+            border-color: #007bff; /* Border color */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        .btn-secondary {
+            background-color: #6c757d; /* Secondary button color */
+            border-color: #6c757d; /* Border color */
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Darker on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        .form-group label {
+            font-weight: bold; /* Make labels bold */
+            margin-bottom: 5px; /* Space between label and input */
+        }
+
+        /* Responsive design adjustments */
+        @media (max-width: 576px) {
+            .container {
+                padding: 30px 20px; /* Reduce padding on small screens */
+            }
+            h1 {
+                font-size: 1.5rem; /* Smaller font size on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Apply for Course</h1>
+
+        <form action="/guest/submitApplication" method="POST" th:object="${applyForm}">
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" class="form-control" id="fullName" name="fullName" required th:field="*{fullName}">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="emailId">Email:</label>
+                <input type="email" class="form-control" id="emailId" name="emailId" required th:field="*{emailId}">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="emailPass">Password:</label>
+                <input type="password" class="form-control" id="emailPass" name="emailPass" required th:field="*{emailPass}">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('emailPass')}" th:errors="*{emailPass}"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="mobileNo">Mobile Number:</label>
+                <input type="text" class="form-control" id="mobileNo" name="mobileNo" required th:field="*{mobileNo}">
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('mobileNo')}" th:errors="*{mobileNo}"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="course">Course:</label>
+                <select class="form-control" id="course" name="course" required th:field="*{course}">
+                    <option value="">--Select a Course--</option>
+                    <option value="Full Stack Development">Full Stack Development</option>
+                    <option value="DSA">DSA</option>
+                    <option value="Angular Development">Angular Development</option>
+                    <option value="Core Java">Core Java</option>
+                    <option value="C Programming">C Programming</option>
+                    <option value="Advanced Java">Advanced Java</option>
+                </select>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('course')}" th:errors="*{course}"></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block mt-3">Submit Application</button>
+        </form>
+        
+        <!-- Back to Dashboard Button -->
+        <a href="/homePage" class="btn btn-secondary btn-block mt-3">Back to Dashboard</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

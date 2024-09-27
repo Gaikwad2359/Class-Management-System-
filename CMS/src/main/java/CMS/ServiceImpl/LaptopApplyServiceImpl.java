@@ -89,18 +89,11 @@ public class LaptopApplyServiceImpl implements LaptopApplyService {
 
         mailSender.send(message);
     }
-
-    private void embedImages(MimeMessageHelper helper) throws MessagingException, IOException {
-        ClassPathResource logoImage = new ClassPathResource("static/images/ZplusLogo.png");
-
-        helper.addInline("companyLogo", logoImage);
-    }
-
     private String buildAdminEmailContent(LaptopApply laptopApplyForm) {
         return "<html>" +
-               "<body style='background-color: black; color: white; font-family: Arial, sans-serif; padding: 20px;'>" +
+               "<body style='background-color: white; color: black; font-family: Arial, sans-serif; padding: 20px;'>" +
                "<div style='text-align: center;'>" +
-               "<img src='cid:companyLogo' style='width: 200px; display: block; margin: auto;' alt='Company Logo'>" +
+               "<img src='cid:companyBlackLogo' style='width: 200px; display: block; margin: auto;' alt='Company Logo'>" +
                "</div>" +
                "<h2 style='text-align: center;'>New Laptop Application</h2>" +
                "<p>A new application for a laptop has been submitted with the following details:</p>" +
@@ -116,12 +109,11 @@ public class LaptopApplyServiceImpl implements LaptopApplyService {
                "</html>";
     }
 
-
     private String buildStudentEmailContent(LaptopApply laptopApplyForm) {
         return "<html>" +
-               "<body style='background-color: black; color: white; font-family: Arial, sans-serif; padding: 20px;'>" +
+               "<body style='background-color: white; color: black; font-family: Arial, sans-serif; padding: 20px;'>" +
                "<div style='text-align: center;'>" +
-               "<img src='cid:companyLogo' style='width: 200px; display: block; margin: auto;' alt='Company Logo'>" +
+               "<img src='cid:companyBlackLogo' style='width: 200px; display: block; margin: auto;' alt='Company Logo'>" +
                "</div>" +
                "<h2 style='text-align: center;'>Laptop Application Confirmation</h2>" +
                "<p>Dear <strong>" + laptopApplyForm.getFullName() + "</strong>,</p>" +
@@ -135,5 +127,11 @@ public class LaptopApplyServiceImpl implements LaptopApplyService {
                "</body>" +
                "</html>";
     }
+    
+    private void embedImages(MimeMessageHelper helper) throws MessagingException, IOException {
+        // Replace the old logo with the new ZplusBlackLogo
+        ClassPathResource logoImage = new ClassPathResource("static/images/ZplusBlackLogo.png");
 
+        helper.addInline("companyBlackLogo", logoImage);
+    }
 }

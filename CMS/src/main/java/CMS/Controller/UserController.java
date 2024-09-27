@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,7 +57,7 @@ import CMS.Master.StudentBatch;
 import CMS.Master.StudentInstallmentMaster;
 import CMS.Master.StudentMaster;
 import CMS.Master.StudentReference;
-import CMS.Service.ApplicationFormService;
+import CMS.Service.ApplyFormService;
 import CMS.Service.ContactService;
 import CMS.Service.CourseService;
 import CMS.Service.DailyUpdateService;
@@ -389,51 +388,26 @@ public class UserController {
 	    
 	    
 	    //Apply Courses 
-	    
 	    @Autowired
-	    private ApplicationFormService applyFormService;
+	    private ApplyFormService applyFormService;
 
 	    @GetMapping("/applyCourse")
 	    public String showApplyForm(Model model) {
 	        model.addAttribute("applyForm", new ApplyForm());
-
-	        List<String> courses = Arrays.asList(
-	                "Full Stack Development", 
-	                "DSA", 
-	                "Angular Development", 
-	                "C Programming", 
-	                "Core Java", 
-	                "Advanced Java"
-	        );
-	        model.addAttribute("courses", courses);
-
-	        return "user/apply-form";
+	        return "StudentCourses/applyCourseForm"; // Return the apply form view
 	    }
 
-	    @PostMapping("/applyStudentCourse")
-	    public String submitApplyForm(@Valid @ModelAttribute("applyForm") ApplyForm applyForm, BindingResult result, Model model) {
-	        if (result.hasErrors()) {
-	            List<String> courses = Arrays.asList(
-	                    "Full Stack Development", 
-	                    "DSA", 
-	                    "Angular Development", 
-	                    "C Programming", 
-	                    "Core Java", 
-	                    "Advanced Java"
-	            );
-	            model.addAttribute("courses", courses);
-
-	            return "user/apply-form";
-	        }
+	    @PostMapping("/submitApplication")
+	    public String submitApplication(@ModelAttribute("applyForm") ApplyForm applyForm) {
 	        applyFormService.saveApplyForm(applyForm);
-	        return "redirect:/user/apply-success";
+	        return "redirect:/user/success"; // Redirect to the success page after submission
 	    }
 
-	    @GetMapping("/apply-success")
-	    public String showSuccessPage() {
-	        return "user/apply-success";
+	    @GetMapping("/success")
+	    public String showSuccessPage(Model model) {
+	        model.addAttribute("message", "Your application has been submitted successfully!");
+	        return "StudentCourses/success"; // Returns the success view name
 	    }
-	    
 	    
 	    
 	    //Laptop Apply 
@@ -456,7 +430,7 @@ public class UserController {
 	        return "redirect:/user/apply-success";
 	    }
 
-	    @GetMapping("/laptop-apply-success")
+	    @GetMapping("/apply-success")
 	    public String showLaptopSuccessPage() {
 	        return "user/apply-success";  
 	    }

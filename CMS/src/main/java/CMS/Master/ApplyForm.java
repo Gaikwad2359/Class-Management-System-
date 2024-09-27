@@ -37,16 +37,6 @@ public class ApplyForm {
     @NotBlank(message = "Course is required")
     private String course;
     
-    @NotBlank(message = "Status is required")
-    private String status; // New field to track status
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	public Long getId() {
 		return id;

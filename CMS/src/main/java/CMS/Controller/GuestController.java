@@ -1,8 +1,5 @@
 package CMS.Controller;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import CMS.Master.ApplyForm;
 import CMS.Master.Contact;
-import CMS.Service.ApplicationFormService;
+import CMS.Service.ApplyFormService;
 import CMS.Service.ContactService;
 import jakarta.validation.Valid;
 
@@ -176,48 +173,23 @@ public class GuestController {
     }
     
     @Autowired
-    private ApplicationFormService applyFormService;
+    private ApplyFormService applyFormService;
 
-    @GetMapping("/guest/ApplyCoursePage")
+    @GetMapping("/guest/applyCourse")
     public String showApplyForm(Model model) {
         model.addAttribute("applyForm", new ApplyForm());
-
-        List<String> courses = Arrays.asList(
-                "Full Stack Development", 
-                "DSA", 
-                "Angular Development", 
-                "C Programming", 
-                "Core Java", 
-                "Advanced Java"
-        );
-        model.addAttribute("courses", courses);
-
-        return "guestCourses/apply-form";
+        return "guestCourses/applyCourseForm"; // Return the apply form view
     }
 
-    @PostMapping("/guest/ApplyStudentCourse")
-    public String submitApplyForm(@Valid @ModelAttribute("applyForm") ApplyForm applyForm, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            List<String> courses = Arrays.asList(
-                    "Full Stack Development", 
-                    "DSA", 
-                    "Angular Development", 
-                    "C Programming", 
-                    "Core Java", 
-                    "Advanced Java"
-            );
-            model.addAttribute("courses", courses);
-
-            return "guestCourses/apply-form";
-        }
+    @PostMapping("/guest/submitApplication")
+    public String submitApplication(@ModelAttribute("applyForm") ApplyForm applyForm) {
         applyFormService.saveApplyForm(applyForm);
-        return "guestCourses/apply-success";  // Directly returning the Thymeleaf template
+        return "redirect:/guest/success"; // Redirect to the success page after submission
     }
 
-
-    @GetMapping("/guest/apply-success")
-    public String showSuccessPage() {
-        return "guestCourses/apply-success";
+    @GetMapping("/guest/success")
+    public String showSuccessPage(Model model) {
+        model.addAttribute("message", "Your application has been submitted successfully!");
+        return "guestCourses/success"; // Returns the success view name
     }
-    
 }

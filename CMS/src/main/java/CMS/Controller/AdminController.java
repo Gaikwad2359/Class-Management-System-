@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import CMS.DAO.UserRepo;
-import CMS.Master.ApplyForm;
 import CMS.Master.BatchMaster;
 import CMS.Master.CityMaster;
 import CMS.Master.CountryMaster;
@@ -29,7 +28,6 @@ import CMS.Master.StudentBatch;
 import CMS.Master.StudentInstallmentMaster;
 import CMS.Master.StudentMaster;
 import CMS.Master.StudentReference;
-import CMS.Service.ApplicationFormService;
 import CMS.Service.BatchService;
 import CMS.Service.CityService;
 import CMS.Service.CountryService;
@@ -155,8 +153,6 @@ public class AdminController {
 	StudentReferenceService studentReferenceService;
 	@Autowired
 	NotesService notesService;
-	@Autowired
-	ApplicationFormService applicationFormService; 
 	 
 
 @GetMapping("/dashboard")
@@ -192,7 +188,6 @@ public class AdminController {
 		
 		List<Notes> lstStudentNotes = notesService.getAllNotes();
 		
-		List<ApplyForm> lstApplyForms = applicationFormService.getAllApplyForms();
 		
 				
 		
@@ -211,7 +206,6 @@ public class AdminController {
 		 dmaster.setTotalStudentInstallments(lstStudentInstallments.size());
 		 dmaster.setTotalStudentReference(lstStudentReferences.size());
 		 dmaster.setTotalStudentNotes(lstStudentNotes.size());
-		 dmaster.setTotalApplyForm(lstApplyForms.size());
 		 
          
 		 model.addAttribute("dashboard",dmaster );

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            text-align: center; /* Center text */
+            animation: fadeIn 0.5s ease forwards; /* Animation for fade-in effect */
+            opacity: 0; /* Start hidden for animation */
+            transform: translateY(-30px); /* Slide down effect */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #28a745; /* Green color for success */
+            margin-bottom: 20px;
+            font-size: 2rem; /* Adjust font size */
+        }
+
+        .message {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            border-radius: 8px; /* Rounded corners for button */
+            transition: background-color 0.3s, transform 0.3s; /* Button transition */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            transform: translateY(-2px); /* Slight lift effect on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Success!</h1>
+        <p class="message" th:text="${message}">Your application has been submitted successfully!</p>
+        <a href="/user/user-dashboard" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

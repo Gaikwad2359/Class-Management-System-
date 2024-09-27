@@ -4,13 +4,10 @@ import java.util.List;
 
 import CMS.Master.ApplyForm;
 
-public interface ApplicationFormService {
-	
-	// Admin Dashboard Records 
+public interface ApplyFormService {
+
     ApplyForm saveApplyForm(ApplyForm applyForm);
-    List<ApplyForm> getApplicationsByStatus(String status);
-	ApplyForm getApplyFormById(Long id);
     List<ApplyForm> getAllApplyForms();
+    ApplyForm getApplyFormById(Long id);
     void deleteApplyForm(Long id);
-    
 }
