@@ -12,13 +12,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Student9")
+@Table(name="Student18")
 public class StudentMaster {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int studentId;
-    
     private String studentFirstName;
     private String studentMiddleName;
     private String studentLastName;

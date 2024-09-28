@@ -49,75 +49,76 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
-	@Autowired
-	private UserRepo userRepo;
-
-	@Autowired
-	UserService userService;
 	
-	@ModelAttribute
-	public void commonUser(Principal p, Model m) {
-		if (p != null) {
-			String email = p.getName();
-			StudentMaster student = userRepo.findByEmail(email);
-			m.addAttribute("user", student);
+		@Autowired
+		private UserRepo userRepo;
+	
+		@Autowired
+		UserService userService;
+		
+		@ModelAttribute
+		public void commonUser(Principal p, Model m) {
+			if (p != null) {
+				String email = p.getName();
+				StudentMaster student = userRepo.findByEmail(email);
+				m.addAttribute("user", student);
+			}
 		}
-	}
-
-    @GetMapping("/register")
-    public String register() {
-        return "Register/register";
-    }
-
-    
-    @GetMapping("/registerAdmin")
-    public String registerAdmin() {
-        return "Register/registerAdmin";
-    }
-
-    @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute StudentMaster student, HttpSession session, HttpServletRequest request) {
-        String url = request.getRequestURL().toString().replace(request.getServletPath(), "");
-
-        StudentMaster newUser = userService.saveStudentMaster(student, url, false);
-
-        if (newUser != null) {
-            session.setAttribute("msg", "Registered successfully");
-        } else {
-            session.setAttribute("msg", "Something went wrong on the server");
-        }
-
-        return "redirect:/Register/register";
-    }
-
-    @PostMapping("/saveAdmin")
-    public String saveAdmin(@ModelAttribute StudentMaster user, HttpSession session, HttpServletRequest request) {
-        String url = request.getRequestURL().toString().replace(request.getServletPath(), "");
-
-        StudentMaster newAdmin = userService.saveStudentMaster(user, url, true);
-
-        if (newAdmin != null) {
-            session.setAttribute("msg", "Admin registered successfully");
-        } else {
-            session.setAttribute("msg", "Something went wrong on the server");
-        }
-
-        return "redirect:/Register/registerAdmin";
-    }
-    
-    @GetMapping("/verify")
-    public String verifyAccount(@Param("code") String code, Model model) {
-        boolean isVerified = userService.verifyAccount(code);
-
-        if (isVerified) {
-            model.addAttribute("msg", "Successfully verified your account");
-        } else {
-            model.addAttribute("msg", "Verification code might be incorrect or already verified");
-        }
-
-        return "message";
-    }
+	
+	    @GetMapping("/register")
+	    public String register() {
+	        return "Register/register";
+	    }
+	
+	    
+	    @GetMapping("/registerAdmin")
+	    public String registerAdmin() {
+	        return "Register/registerAdmin";
+	    }
+	
+	    @PostMapping("/saveUser")
+	    public String saveUser(@ModelAttribute StudentMaster student, HttpSession session, HttpServletRequest request) {
+	        String url = request.getRequestURL().toString().replace(request.getServletPath(), "");
+	
+	        StudentMaster newUser = userService.saveStudentMaster(student, url, false);
+	
+	        if (newUser != null) {
+	            session.setAttribute("msg", "Registered successfully");
+	        } else {
+	            session.setAttribute("msg", "Something went wrong on the server");
+	        }
+	
+	        return "redirect:/admin/register";
+	    }
+	
+	    @PostMapping("/saveAdmin")
+	    public String saveAdmin(@ModelAttribute StudentMaster user, HttpSession session, HttpServletRequest request) {
+	        String url = request.getRequestURL().toString().replace(request.getServletPath(), "");
+	
+	        StudentMaster newAdmin = userService.saveStudentMaster(user, url, true);
+	
+	        if (newAdmin != null) {
+	            session.setAttribute("msg", "Admin registered successfully");
+	        } else {
+	            session.setAttribute("msg", "Something went wrong on the server");
+	        }
+	
+	        return "redirect:/admin/registerAdmin";
+	    }
+	    
+	    @GetMapping("/verify")
+	    public String verifyAccount(@Param("code") String code, Model model) {
+	        boolean isVerified = userService.verifyAccount(code);
+	
+	        if (isVerified) {
+	            model.addAttribute("msg", "Successfully verified your account");
+	        } else {
+	            model.addAttribute("msg", "Verification code might be incorrect or already verified");
+	        }
+	
+	        return "message";
+	    }
+		
 	
 	@GetMapping("/profile")
 	public String profile() {
